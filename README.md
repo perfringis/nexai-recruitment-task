@@ -1,2 +1,2 @@
-# nextai-recruitment-task
+# nexai-recruitment-task
 nextai-recruitment-task
