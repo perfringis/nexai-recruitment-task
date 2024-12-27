@@ -4,7 +4,7 @@ import { InvalidPostalCodeException } from 'src/error/invalid.postal.code.except
 describe('PostalCode Test', () => {
   test('should create PostalCode instance', () => {
     // when
-    const postalCode: PostalCode = PostalCode.of('11-222');
+    const postalCode: PostalCode = new PostalCode('11-222');
 
     // then
     expect(postalCode.asString()).toEqual('11-222');
@@ -13,24 +13,24 @@ describe('PostalCode Test', () => {
   test('should not create post code when provided input is not valid', () => {
     // expect
     expect(() => {
-      PostalCode.of('XX-XXX');
+      new PostalCode('XX-XXX');
     }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
 
     // expect
     expect(() => {
-      PostalCode.of('111-22');
+      new PostalCode('111-22');
     }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
 
     // expect
     expect(() => {
-      PostalCode.of('');
+      new PostalCode('');
     }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
   });
 
   test('should not create postal code when provided input is empty', () => {
     // expect
     expect(() => {
-      PostalCode.of('');
+      new PostalCode('');
     }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
   });
 });

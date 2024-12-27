@@ -3,19 +3,15 @@ import { InvalidPostalCodeException } from 'src/error/invalid.postal.code.except
 export class PostalCode {
   private postalCode: string;
 
-  private constructor(postalCode: string) {
-    this.postalCode = postalCode;
-  }
-
-  public static of(postalCode: string): PostalCode {
+  constructor(postalCode: string) {
     if (!this.valid(postalCode)) {
       throw new InvalidPostalCodeException('Invalid postal code.');
     }
 
-    return new PostalCode(postalCode);
+    this.postalCode = postalCode;
   }
 
-  private static valid(postalCode: string): boolean {
+  private valid(postalCode: string): boolean {
     const regex = /^[0-9]{2}-[0-9]{3}$/;
     return regex.test(postalCode);
   }
