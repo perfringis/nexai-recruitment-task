@@ -1,4 +1,6 @@
+import { Address } from './address';
 import { FirstName } from './first.name';
+import { LastName } from './last.name';
 
 export class Customer {
   private readonly firstName: FirstName;
