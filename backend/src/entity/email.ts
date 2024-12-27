@@ -24,7 +24,7 @@ export class Email {
     return this.email;
   }
 
-  public equals(otherEmail: Email): boolean {
-    return this.email === otherEmail.asString();
+  public equals(other: Email): boolean {
+    return this.email === other.asString();
   }
 }

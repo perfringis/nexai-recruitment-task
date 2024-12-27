@@ -24,7 +24,7 @@ export class PostalCode {
     return this.postalCode;
   }
 
-  public equals(otherPostalCode: PostalCode): boolean {
-    return this.postalCode === otherPostalCode.asString();
+  public equals(other: PostalCode): boolean {
+    return this.postalCode === other.asString();
   }
 }

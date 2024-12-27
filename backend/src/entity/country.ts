@@ -23,7 +23,7 @@ export class Country {
     return this.country;
   }
 
-  public equals(otherCountry: Country): boolean {
-    return this.country === otherCountry.asString();
+  public equals(other: Country): boolean {
+    return this.country === other.asString();
   }
 }

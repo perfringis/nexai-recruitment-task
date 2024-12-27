@@ -21,7 +21,7 @@ export class City {
     return this.city;
   }
 
-  public equals(otherCity: City): boolean {
-    return this.city === otherCity.asString();
+  public equals(other: City): boolean {
+    return this.city === other.asString();
   }
 }
