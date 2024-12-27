@@ -15,4 +15,11 @@ describe('Email Test', () => {
       Email.of('bad.email.address');
     }).toThrow(new InvalidEmailException('Invalid email address!'));
   });
+
+  test('should not create email when provided input is empty', () => {
+    // expect
+    expect(() => {
+      Email.of('');
+    }).toThrow(new InvalidEmailException('Invalid email address!'));
+  });
 });
