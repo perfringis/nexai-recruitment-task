@@ -1,16 +1,12 @@
 import { LicensePlate } from './license.plate';
-import { VIN } from './vehicle.identification.number';
+import { VIN } from './vin';
 
 export class Car {
   private readonly brand: string;
   private readonly licensePlate: LicensePlate;
   private readonly vin: VIN;
 
-  constructor(
-    brand: string,
-    licensePlate: LicensePlate,
-    vin: VIN,
-  ) {
+  constructor(brand: string, licensePlate: LicensePlate, vin: VIN) {
     this.brand = brand;
     this.licensePlate = licensePlate;
     this.vin = vin;
