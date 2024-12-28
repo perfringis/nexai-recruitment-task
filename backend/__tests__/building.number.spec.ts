@@ -7,7 +7,7 @@ describe('BuildingNumber Test', () => {
     const buildingNumber: BuildingNumber = new BuildingNumber('1');
 
     // then
-    expect(buildingNumber.asString()).toEqual('1');
+    expect(buildingNumber.toString()).toEqual('1');
   });
 
   test('should not create building number when value is zero', () => {

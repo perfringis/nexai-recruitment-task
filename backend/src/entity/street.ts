@@ -11,11 +11,11 @@ export class Street {
     this.street = street;
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.street;
   }
 
   public equals(other: Street): boolean {
-    return this.street === other.asString();
+    return this.street === other.toString();
   }
 }

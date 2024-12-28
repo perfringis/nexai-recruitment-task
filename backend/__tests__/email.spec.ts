@@ -6,7 +6,7 @@ describe('Email Test', () => {
     // when
     const email: Email = Email.of('test@test.com');
     // then
-    expect(email.asString()).toEqual('test@test.com');
+    expect(email.toString()).toEqual('test@test.com');
   });
 
   test('should not create email when provided input is not valid', () => {

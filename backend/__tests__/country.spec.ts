@@ -6,7 +6,7 @@ describe('County Test', () => {
     // when
     const country: Country = new Country('Polska');
     // then
-    expect(country.asString()).toEqual('Polska');
+    expect(country.toString()).toEqual('Polska');
   });
 
   test('should not create country when provided input is not valid', () => {

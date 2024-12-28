@@ -19,11 +19,11 @@ export class LicensePlate {
     return regex.test(licensePlate.toUpperCase());
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.licensePlate;
   }
 
   public equals(other: LicensePlate): boolean {
-    return this.licensePlate === other.asString();
+    return this.licensePlate === other.toString();
   }
 }

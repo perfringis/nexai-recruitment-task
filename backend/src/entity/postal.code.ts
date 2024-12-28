@@ -16,11 +16,11 @@ export class PostalCode {
     return regex.test(postalCode);
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.postalCode;
   }
 
   public equals(other: PostalCode): boolean {
-    return this.postalCode === other.asString();
+    return this.postalCode === other.toString();
   }
 }

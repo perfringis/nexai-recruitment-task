@@ -19,15 +19,15 @@ export class BuildingNumber {
     return value && value > 0;
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.buildingNumber;
   }
 
-  public asNumber(): number {
+  public toNumber(): number {
     return parseInt(this.buildingNumber, 10);
   }
 
   public equals(other: BuildingNumber): boolean {
-    return this.buildingNumber === other.asString();
+    return this.buildingNumber === other.toString();
   }
 }

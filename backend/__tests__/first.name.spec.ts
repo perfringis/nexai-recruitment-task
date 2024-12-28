@@ -6,7 +6,7 @@ describe('FirstName Test', () => {
     // when
     const firstName: FirstName = new FirstName('Joe');
     // then
-    expect(firstName.asString()).toEqual('Joe');
+    expect(firstName.toString()).toEqual('Joe');
   });
 
   test('should not create first name when input is not valid', () => {

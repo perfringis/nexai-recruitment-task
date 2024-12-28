@@ -19,11 +19,11 @@ export class Country {
     return regex.test(country);
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.country;
   }
 
   public equals(other: Country): boolean {
-    return this.country === other.asString();
+    return this.country === other.toString();
   }
 }

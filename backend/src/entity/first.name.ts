@@ -19,11 +19,11 @@ export class FirstName {
     return regex.test(firstName);
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.firstName;
   }
 
   public equals(other: FirstName): boolean {
-    return this.firstName === other.asString();
+    return this.firstName === other.toString();
   }
 }

@@ -46,6 +46,6 @@ export class Address {
   }
 
   public toString() {
-    return `Address { street=${this.street.asString()}, city=${this.city.asString()}, county=${this.country.asString()}, postalCode=${this.postalCode.asString()}, buildingNumber=${this.buildingNumber.asNumber()}}`;
+    return `Address { street=${this.street.toString()}, city=${this.city.toString()}, county=${this.country.toString()}, postalCode=${this.postalCode.toString()}, buildingNumber=${this.buildingNumber.toNumber()}}`;
   }
 }

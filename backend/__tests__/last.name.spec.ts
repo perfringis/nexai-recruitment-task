@@ -6,7 +6,7 @@ describe('LastName Test', () => {
     // when
     const lastName: LastName = new LastName('Doe');
     // then
-    expect(lastName.asString()).toEqual('Doe');
+    expect(lastName.toString()).toEqual('Doe');
   });
 
   test('should not create Last name when input is not valid', () => {

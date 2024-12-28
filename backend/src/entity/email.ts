@@ -20,11 +20,11 @@ export class Email {
     return emailRegex.test(email);
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.email;
   }
 
   public equals(other: Email): boolean {
-    return this.email === other.asString();
+    return this.email === other.toString();
   }
 }

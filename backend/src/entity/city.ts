@@ -17,11 +17,11 @@ export class City {
     return regex.test(city);
   }
 
-  public asString(): string {
+  public toString(): string {
     return this.city;
   }
 
   public equals(other: City): boolean {
-    return this.city === other.asString();
+    return this.city === other.toString();
   }
 }

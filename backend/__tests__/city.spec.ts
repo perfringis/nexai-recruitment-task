@@ -6,7 +6,7 @@ describe('City Test', () => {
     // when
     const city: City = new City('Wroclaw');
     // then
-    expect(city.asString()).toEqual('Wroclaw');
+    expect(city.toString()).toEqual('Wroclaw');
   });
 
   test('should not create city when provided input is not valid', () => {

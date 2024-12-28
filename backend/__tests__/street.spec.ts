@@ -7,7 +7,7 @@ describe('Street Test', () => {
     const street: Street = new Street('ul. Świętokrzyska 31/33');
 
     // then
-    expect(street.asString()).toEqual('ul. Świętokrzyska 31/33');
+    expect(street.toString()).toEqual('ul. Świętokrzyska 31/33');
   });
 
   test('should not create street when input value is empty', () => {

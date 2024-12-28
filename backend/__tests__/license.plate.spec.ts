@@ -7,7 +7,7 @@ describe('LicensePlate Test', () => {
     const licensePlate: LicensePlate = new LicensePlate('rz 7728j');
 
     // then
-    expect(licensePlate.asString()).toEqual('RZ 7728J');
+    expect(licensePlate.toString()).toEqual('RZ 7728J');
   });
 
   test('should not create instance of license plate when value is not valid', () => {

@@ -7,7 +7,7 @@ describe('PostalCode Test', () => {
     const postalCode: PostalCode = new PostalCode('11-222');
 
     // then
-    expect(postalCode.asString()).toEqual('11-222');
+    expect(postalCode.toString()).toEqual('11-222');
   });
 
   test('should not create post code when provided input is not valid', () => {
