@@ -1,15 +1,27 @@
 import { LicensePlate } from './license.plate';
 import { VIN } from './vin';
 
-export class Car {
-  private readonly brand: string;
-  private readonly licensePlate: LicensePlate;
-  private readonly vin: VIN;
+export enum CarStatus {
+  AVAILABLE = 'available',
+  RENTED = 'rented',
+}
 
-  constructor(brand: string, licensePlate: LicensePlate, vin: VIN) {
+export class Car {
+  private brand: string;
+  private licensePlate: LicensePlate;
+  private vin: VIN;
+  private status: CarStatus;
+
+  constructor(
+    brand: string,
+    licensePlate: LicensePlate,
+    vin: VIN,
+    status: CarStatus,
+  ) {
     this.brand = brand;
     this.licensePlate = licensePlate;
     this.vin = vin;
+    this.status = status;
   }
 
   public getBrand(): string {
@@ -22,5 +34,17 @@ export class Car {
 
   public getVIN(): VIN {
     return this.vin;
+  }
+
+  public getStatus(): CarStatus {
+    return this.status;
+  }
+
+  public isAvailable(): boolean {
+    return this.status === CarStatus.AVAILABLE;
+  }
+
+  public isRented(): boolean {
+    return this.status === CarStatus.RENTED;
   }
 }

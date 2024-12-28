@@ -3,9 +3,9 @@ import { FirstName } from './first.name';
 import { LastName } from './last.name';
 
 export class Customer {
-  private readonly firstName: FirstName;
-  private readonly lastName: LastName;
-  private readonly address: Address;
+  private firstName: FirstName;
+  private lastName: LastName;
+  private address: Address;
 
   constructor(firstName: FirstName, lastName: LastName, address: Address) {
     this.firstName = firstName;
