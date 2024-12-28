@@ -1,5 +1,5 @@
-import { Street } from 'src/entity/street';
-import { InvalidStreetException } from 'src/error/invalid.street.exception';
+import { BadRequestException } from '@nestjs/common';
+import { Street } from 'src/value-object/street';
 
 describe('Street Test', () => {
   test('should create street instance', () => {
@@ -14,6 +14,6 @@ describe('Street Test', () => {
     // expect
     expect(() => {
       new Street('');
-    }).toThrow(new InvalidStreetException('Street value cannot be empty.'));
+    }).toThrow(new BadRequestException('Street cannot be empty.'));
   });
 });

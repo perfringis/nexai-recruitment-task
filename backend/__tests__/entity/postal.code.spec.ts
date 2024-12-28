@@ -1,5 +1,5 @@
-import { PostalCode } from 'src/entity/postal.code';
-import { InvalidPostalCodeException } from 'src/error/invalid.postal.code.exception';
+import { BadRequestException } from '@nestjs/common';
+import { PostalCode } from 'src/value-object/postal.code';
 
 describe('PostalCode Test', () => {
   test('should create PostalCode instance', () => {
@@ -14,23 +14,31 @@ describe('PostalCode Test', () => {
     // expect
     expect(() => {
       new PostalCode('XX-XXX');
-    }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
+    }).toThrow(
+      new BadRequestException('Postal code cannot be empty or have letters.'),
+    );
 
     // expect
     expect(() => {
       new PostalCode('111-22');
-    }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
+    }).toThrow(
+      new BadRequestException('Postal code cannot be empty or have letters.'),
+    );
 
     // expect
     expect(() => {
       new PostalCode('');
-    }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
+    }).toThrow(
+      new BadRequestException('Postal code cannot be empty or have letters.'),
+    );
   });
 
   test('should not create postal code when provided input is empty', () => {
     // expect
     expect(() => {
       new PostalCode('');
-    }).toThrow(new InvalidPostalCodeException('Invalid postal code.'));
+    }).toThrow(
+      new BadRequestException('Postal code cannot be empty or have letters.'),
+    );
   });
 });

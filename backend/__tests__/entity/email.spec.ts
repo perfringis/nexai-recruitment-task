@@ -1,10 +1,10 @@
-import { Email } from 'src/entity/email';
-import { InvalidEmailException } from 'src/error/invalid.email.exception';
+import { BadRequestException } from '@nestjs/common';
+import { Email } from 'src/value-object/email';
 
 describe('Email Test', () => {
   test('should create email instance', () => {
     // when
-    const email: Email = Email.of('test@test.com');
+    const email: Email = new Email('test@test.com');
     // then
     expect(email.toString()).toEqual('test@test.com');
   });
@@ -12,14 +12,18 @@ describe('Email Test', () => {
   test('should not create email when provided input is not valid', () => {
     // expect
     expect(() => {
-      Email.of('bad.email.address');
-    }).toThrow(new InvalidEmailException('Invalid email address!'));
+      new Email('bad.email.address');
+    }).toThrow(
+      new BadRequestException('Email is empty or has no valid format.'),
+    );
   });
 
   test('should not create email when provided input is empty', () => {
     // expect
     expect(() => {
-      Email.of('');
-    }).toThrow(new InvalidEmailException('Invalid email address!'));
+      new Email('');
+    }).toThrow(
+      new BadRequestException('Email is empty or has no valid format.'),
+    );
   });
 });

@@ -1,13 +1,17 @@
-import { InvalidCountryException } from 'src/error/invalid.country.exception';
+import { BadRequestException } from '@nestjs/common';
+import { ValueTransformer } from 'typeorm';
+
+export const CountryTransformer: ValueTransformer = {
+  from: (value: string) => new Country(value),
+  to: (value: Country) => value.toString(),
+};
 
 export class Country {
   private readonly country: string;
 
   constructor(country: string) {
     if (!this.valid(country)) {
-      throw new InvalidCountryException(
-        'Provided country has digits or is empty.',
-      );
+      throw new BadRequestException('County cannot be empty or have digits.');
     }
 
     this.country = country;

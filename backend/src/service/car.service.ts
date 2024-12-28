@@ -6,9 +6,9 @@ import {
 import { CreateCarDTO } from 'src/dto/create.dto';
 import { UpdateCarDTO } from 'src/dto/update.car.dto';
 import { Car, CarStatus } from 'src/entity/car';
-import { LicensePlate } from 'src/entity/license.plate';
-import { VIN } from 'src/entity/vin';
 import { CarRepository } from 'src/repository/car.repository';
+import { LicensePlate } from 'src/value-object/license.plate';
+import { VIN } from 'src/value-object/vin';
 
 @Injectable()
 export class CarService {
@@ -32,7 +32,7 @@ export class CarService {
     const existing: Car = await this.carRepository.findByVIN(dto.vin);
 
     if (existing) {
-      throw new ConflictException('Car is already defined.');
+      throw new ConflictException('Car is defined.');
     }
 
     const car: Car = new Car(

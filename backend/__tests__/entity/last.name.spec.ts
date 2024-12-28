@@ -1,5 +1,5 @@
-import { LastName } from 'src/entity/last.name';
-import { InvalidLastNameException } from 'src/error/invalid.last.name.exception';
+import { BadRequestException } from '@nestjs/common';
+import { LastName } from 'src/value-object/last.name';
 
 describe('LastName Test', () => {
   test('should create Last name instance', () => {
@@ -14,9 +14,7 @@ describe('LastName Test', () => {
     expect(() => {
       new LastName('D0e');
     }).toThrow(
-      new InvalidLastNameException(
-        'Provided value cannot be empty or have digits.',
-      ),
+      new BadRequestException('Lastname cannot be empty or have digits.'),
     );
   });
 
@@ -25,9 +23,7 @@ describe('LastName Test', () => {
     expect(() => {
       new LastName('');
     }).toThrow(
-      new InvalidLastNameException(
-        'Provided value cannot be empty or have digits.',
-      ),
+      new BadRequestException('Lastname cannot be empty or have digits.'),
     );
   });
 });

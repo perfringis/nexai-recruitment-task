@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import { LicensePlate } from 'src/entity/license.plate';
+import { LicensePlate } from 'src/value-object/license.plate';
 
 describe('LicensePlate Test', () => {
   test('should create instance of license plate', () => {

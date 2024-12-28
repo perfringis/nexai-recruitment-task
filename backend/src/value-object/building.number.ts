@@ -1,12 +1,18 @@
-import { InvalidBuildingNumberException } from 'src/error/invalid.building.number.exception';
+import { BadRequestException } from '@nestjs/common';
+import { ValueTransformer } from 'typeorm';
+
+export const BuildingNumberTransformer: ValueTransformer = {
+  from: (value: string) => new BuildingNumber(value),
+  to: (value: BuildingNumber) => value.toString(),
+};
 
 export class BuildingNumber {
   private readonly buildingNumber: string;
 
   constructor(buildingNumber: string) {
     if (!this.valid(buildingNumber)) {
-      throw new InvalidBuildingNumberException(
-        'Provided value cannot be zero or negative.',
+      throw new BadRequestException(
+        'Building number cannot be zero or negative.',
       );
     }
 

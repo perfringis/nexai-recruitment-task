@@ -1,6 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { LicensePlate, LicensePlateTransformer } from './license.plate';
-import { VIN, VINTransformer } from './vin';
+import { VIN, VINTransformer } from 'src/value-object/vin';
+import {
+  LicensePlate,
+  LicensePlateTransformer,
+} from 'src/value-object/license.plate';
 
 export enum CarStatus {
   AVAILABLE = 'available',

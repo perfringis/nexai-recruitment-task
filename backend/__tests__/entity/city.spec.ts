@@ -1,5 +1,5 @@
-import { City } from 'src/entity/city';
-import { InvalidCityException } from 'src/error/invalid.city.exception';
+import { BadRequestException } from '@nestjs/common';
+import { City } from 'src/value-object/city';
 
 describe('City Test', () => {
   test('should create city instance', () => {
@@ -13,17 +13,13 @@ describe('City Test', () => {
     // expect
     expect(() => {
       new City('Wroc1aw');
-    }).toThrow(
-      new InvalidCityException('Provided city has digits or is empty.'),
-    );
+    }).toThrow(new BadRequestException('City cannot be empty or have digits.'));
   });
 
   test('should not create city when provided input is empty', () => {
     // expect
     expect(() => {
       new City('');
-    }).toThrow(
-      new InvalidCityException('Provided city has digits or is empty.'),
-    );
+    }).toThrow(new BadRequestException('City cannot be empty or have digits.'));
   });
 });

@@ -1,5 +1,5 @@
-import { BuildingNumber } from 'src/entity/building.number';
-import { InvalidBuildingNumberException } from 'src/error/invalid.building.number.exception';
+import { BadRequestException } from '@nestjs/common';
+import { BuildingNumber } from 'src/value-object/building.number';
 
 describe('BuildingNumber Test', () => {
   test('should create building number instance', () => {
@@ -15,9 +15,7 @@ describe('BuildingNumber Test', () => {
     expect(() => {
       new BuildingNumber('0');
     }).toThrow(
-      new InvalidBuildingNumberException(
-        'Provided value cannot be zero or negative.',
-      ),
+      new BadRequestException('Building number cannot be zero or negative.'),
     );
   });
 
@@ -26,9 +24,7 @@ describe('BuildingNumber Test', () => {
     expect(() => {
       new BuildingNumber('-1');
     }).toThrow(
-      new InvalidBuildingNumberException(
-        'Provided value cannot be zero or negative.',
-      ),
+      new BadRequestException('Building number cannot be zero or negative.'),
     );
   });
 });

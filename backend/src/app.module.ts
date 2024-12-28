@@ -5,6 +5,12 @@ import { CarController } from './controller/car.controller';
 import { CarService } from './service/car.service';
 import { CarRepository } from './repository/car.repository';
 import { Car } from './entity/car';
+import { CustomerController } from './controller/customer.controller';
+import { CustomerService } from './service/customer.service';
+import { CustomerRepository } from './repository/customer.repository';
+import { Address } from './value-object/address';
+import { Customer } from './entity/customer';
+import { AddressRepository } from './repository/address.repository';
 
 @Module({
   imports: [
@@ -21,10 +27,19 @@ import { Car } from './entity/car';
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
-      entities: [Car],
+      entities: [Address, Car, Customer],
     }),
   ],
-  controllers: [CarController],
-  providers: [CarService, CarRepository],
+  controllers: [CarController, CustomerController],
+  providers: [
+    // services
+    CarService,
+    CustomerService,
+
+    // repositories
+    AddressRepository,
+    CarRepository,
+    CustomerRepository,
+  ],
 })
 export class AppModule {}

@@ -1,10 +1,10 @@
-import { Address } from 'src/entity/address';
-import { BuildingNumber } from 'src/entity/building.number';
-import { City } from 'src/entity/city';
-import { Country } from 'src/entity/country';
-import { PostalCode } from 'src/entity/postal.code';
-import { Street } from 'src/entity/street';
-import { InvalidStreetException } from 'src/error/invalid.street.exception';
+import { BadRequestException } from '@nestjs/common';
+import { Address } from 'src/value-object/address';
+import { BuildingNumber } from 'src/value-object/building.number';
+import { City } from 'src/value-object/city';
+import { Country } from 'src/value-object/country';
+import { PostalCode } from 'src/value-object/postal.code';
+import { Street } from 'src/value-object/street';
 
 describe('Address Test', () => {
   test('should create address', () => {
@@ -33,6 +33,6 @@ describe('Address Test', () => {
         new PostalCode(''),
         new BuildingNumber(''),
       );
-    }).toThrow(new InvalidStreetException('Street value cannot be empty.'));
+    }).toThrow(new BadRequestException('Street cannot be empty.'));
   });
 });

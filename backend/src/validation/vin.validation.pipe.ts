@@ -1,5 +1,5 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { VIN } from 'src/entity/vin';
+import { VIN } from 'src/value-object/vin';
 
 @Injectable()
 export class VINValidationPipe implements PipeTransform {

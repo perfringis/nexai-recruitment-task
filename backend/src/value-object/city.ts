@@ -1,11 +1,17 @@
-import { InvalidCityException } from 'src/error/invalid.city.exception';
+import { BadRequestException } from '@nestjs/common';
+import { ValueTransformer } from 'typeorm';
+
+export const CityTransformer: ValueTransformer = {
+  from: (value: string) => new City(value),
+  to: (value: City) => value.toString(),
+};
 
 export class City {
   private readonly city: string;
 
   constructor(city: string) {
     if (!this.valid(city)) {
-      throw new InvalidCityException('Provided city has digits or is empty.');
+      throw new BadRequestException('City cannot be empty or have digits.');
     }
 
     this.city = city;

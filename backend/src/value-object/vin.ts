@@ -7,7 +7,7 @@ export const VINTransformer: ValueTransformer = {
 };
 
 export class VIN {
-  private value: string;
+  private readonly value: string;
 
   constructor(value: string) {
     if (!this.valid(value)) {

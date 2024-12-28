@@ -1,12 +1,18 @@
-import { InvalidFirstNameException } from 'src/error/invalid.first.name.exception';
+import { BadRequestException } from '@nestjs/common';
+import { ValueTransformer } from 'typeorm';
+
+export const FirstNameTransformer: ValueTransformer = {
+  from: (value: string) => new FirstName(value),
+  to: (value: FirstName) => value.toString(),
+};
 
 export class FirstName {
   private readonly firstName: string;
 
   constructor(firstName: string) {
     if (!this.valid(firstName)) {
-      throw new InvalidFirstNameException(
-        'Provided value cannot be empty or have digits.',
+      throw new BadRequestException(
+        'Firstname cannot be empty or have digits.',
       );
     }
 

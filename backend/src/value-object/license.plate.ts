@@ -7,7 +7,7 @@ export const LicensePlateTransformer: ValueTransformer = {
 };
 
 export class LicensePlate {
-  private value: string;
+  private readonly value: string;
 
   constructor(value: string) {
     if (!this.valid(value)) {

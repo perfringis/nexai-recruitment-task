@@ -1,11 +1,19 @@
-import { InvalidPostalCodeException } from 'src/error/invalid.postal.code.exception';
+import { BadRequestException } from '@nestjs/common';
+import { ValueTransformer } from 'typeorm';
+
+export const PostalCodeTransformer: ValueTransformer = {
+  from: (value: string) => new PostalCode(value),
+  to: (value: PostalCode) => value.toString(),
+};
 
 export class PostalCode {
-  private postalCode: string;
+  private readonly postalCode: string;
 
   constructor(postalCode: string) {
     if (!this.valid(postalCode)) {
-      throw new InvalidPostalCodeException('Invalid postal code.');
+      throw new BadRequestException(
+        'Postal code cannot be empty or have letters.',
+      );
     }
 
     this.postalCode = postalCode;

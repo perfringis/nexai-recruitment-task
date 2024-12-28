@@ -1,5 +1,5 @@
-import { Country } from 'src/entity/country';
-import { InvalidCountryException } from 'src/error/invalid.country.exception';
+import { BadRequestException } from '@nestjs/common';
+import { Country } from 'src/value-object/country';
 
 describe('County Test', () => {
   test('should create county instance', () => {
@@ -14,7 +14,7 @@ describe('County Test', () => {
     expect(() => {
       new Country('P01ska');
     }).toThrow(
-      new InvalidCountryException('Provided country has digits or is empty.'),
+      new BadRequestException('County cannot be empty or have digits.'),
     );
   });
 
@@ -23,7 +23,7 @@ describe('County Test', () => {
     expect(() => {
       new Country('');
     }).toThrow(
-      new InvalidCountryException('Provided country has digits or is empty.'),
+      new BadRequestException('County cannot be empty or have digits.'),
     );
   });
 });
