@@ -1,11 +1,12 @@
 import { InvalidLicensePlateException } from 'src/error/invalid.license.plate.exception';
-import { Column } from 'typeorm';
+import { ValueTransformer } from 'typeorm';
+
+export const LicensePlateTransformer: ValueTransformer = {
+  from: (value: string) => new LicensePlate(value),
+  to: (value: LicensePlate) => value.toString(),
+};
 
 export class LicensePlate {
-  @Column({
-    name: '_value',
-    type: 'varchar',
-  })
   private value: string;
 
   constructor(value: string) {

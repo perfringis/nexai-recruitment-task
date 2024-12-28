@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { LicensePlate } from './license.plate';
-import { VIN } from './vin';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { LicensePlate, LicensePlateTransformer } from './license.plate';
+import { VIN, VINTransformer } from './vin';
 
 export enum CarStatus {
   AVAILABLE = 'available',
@@ -9,17 +9,19 @@ export enum CarStatus {
 
 @Entity({ name: 'car' })
 export class Car {
-  @PrimaryColumn({
-    name: 'vin',
-    type: 'varchar',
-  })
-  private vin: VIN;
+  @PrimaryGeneratedColumn('uuid')
+  private id: string;
+
+  @Column({ name: 'vin', type: 'varchar', transformer: VINTransformer })
+  vin: VIN;
 
   @Column({ name: 'brand', type: 'varchar' })
   private brand: string;
 
-  @Column(() => LicensePlate, {
-    prefix: true,
+  @Column({
+    name: 'license_plate',
+    type: 'varchar',
+    transformer: LicensePlateTransformer,
   })
   private licensePlate: LicensePlate;
 
@@ -36,6 +38,10 @@ export class Car {
     this.brand = brand;
     this.licensePlate = licensePlate;
     this.status = status;
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public getVIN(): VIN {

@@ -1,25 +1,31 @@
 import { InvalidVINException } from 'src/error/invalid.vin.exception';
+import { ValueTransformer } from 'typeorm';
+
+export const VINTransformer: ValueTransformer = {
+  from: (value: string) => new VIN(value),
+  to: (value: VIN) => value.toString(),
+};
 
 export class VIN {
-  private readonly vin: string;
+  private value: string;
 
-  constructor(vin: string) {
-    if (!this.valid(vin)) {
+  constructor(value: string) {
+    if (!this.valid(value)) {
       throw new InvalidVINException(
         'Provided value cannot be empty, less than 17 characters or exclude I, O, Q.',
       );
     }
 
-    this.vin = vin;
+    this.value = value;
   }
 
-  private valid(vin: string): boolean {
+  private valid(value: string): boolean {
     const regex = /^[A-HJ-NPR-Z0-9]{17}$/;
 
-    return regex.test(vin);
+    return regex.test(value);
   }
 
   public toString(): string {
-    return this.vin;
+    return this.value;
   }
 }

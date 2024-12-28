@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CarDTO } from 'src/dto/car.dto';
+import { CreateCarDTO } from 'src/dto/create.dto';
 import { Car } from 'src/entity/car';
 import { CarService } from 'src/service/car.service';
 
@@ -12,6 +13,18 @@ export class CarController {
     const cars: Car[] = await this.carService.getCars();
 
     return this.toDTOs(cars);
+  }
+
+  @Get('/car/:vin')
+  public async getCar(@Param('vin') vin: string): Promise<CarDTO> {
+    const car: Car = await this.carService.getCar(vin);
+
+    return this.toDTO(car);
+  }
+
+  @Post('/car')
+  public async createCar(@Body() dto: CreateCarDTO) {
+    return this.carService.createCar(dto);
   }
 
   private toDTOs(cars: Car[]): CarDTO[] {

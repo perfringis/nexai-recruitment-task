@@ -11,4 +11,12 @@ export class CarRepository extends Repository<Car> {
   public async findAll(): Promise<Car[]> {
     return await this.find({});
   }
+
+  public async findByVIN(vin: string): Promise<Car> {
+    return await this.findOne({
+      where: {
+        vin: vin,
+      },
+    });
+  }
 }
