@@ -1,3 +1,4 @@
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { LicensePlate } from './license.plate';
 import { VIN } from './vin';
 
@@ -6,10 +7,23 @@ export enum CarStatus {
   RENTED = 'rented',
 }
 
+@Entity({ name: 'car' })
 export class Car {
-  private brand: string;
-  private licensePlate: LicensePlate;
+  @PrimaryColumn({
+    name: 'vin',
+    type: 'varchar',
+  })
   private vin: VIN;
+
+  @Column({ name: 'brand', type: 'varchar' })
+  private brand: string;
+
+  @Column(() => LicensePlate, {
+    prefix: true,
+  })
+  private licensePlate: LicensePlate;
+
+  @Column({ name: 'status', type: 'enum', enum: CarStatus })
   private status: CarStatus;
 
   constructor(
@@ -18,10 +32,14 @@ export class Car {
     vin: VIN,
     status: CarStatus,
   ) {
+    this.vin = vin;
     this.brand = brand;
     this.licensePlate = licensePlate;
-    this.vin = vin;
     this.status = status;
+  }
+
+  public getVIN(): VIN {
+    return this.vin;
   }
 
   public getBrand(): string {
@@ -30,10 +48,6 @@ export class Car {
 
   public getLicensePlate(): LicensePlate {
     return this.licensePlate;
-  }
-
-  public getVIN(): VIN {
-    return this.vin;
   }
 
   public getStatus(): CarStatus {

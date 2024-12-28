@@ -1,29 +1,34 @@
 import { InvalidLicensePlateException } from 'src/error/invalid.license.plate.exception';
+import { Column } from 'typeorm';
 
 export class LicensePlate {
-  private readonly licensePlate: string;
+  @Column({
+    name: '_value',
+    type: 'varchar',
+  })
+  private value: string;
 
-  constructor(licensePlate: string) {
-    if (!this.valid(licensePlate)) {
+  constructor(value: string) {
+    if (!this.valid(value)) {
       throw new InvalidLicensePlateException(
         'Provide value is empty or not valid.',
       );
     }
 
-    this.licensePlate = licensePlate.toUpperCase();
+    this.value = value.toUpperCase();
   }
 
-  private valid(licensePlate: string): boolean {
+  private valid(value: string): boolean {
     const regex = /^[A-Z]{1,3}\s?[A-Z0-9]{4,5}$/;
 
-    return regex.test(licensePlate.toUpperCase());
+    return regex.test(value.toUpperCase());
   }
 
   public toString(): string {
-    return this.licensePlate;
+    return this.value;
   }
 
   public equals(other: LicensePlate): boolean {
-    return this.licensePlate === other.toString();
+    return this.value === other.toString();
   }
 }

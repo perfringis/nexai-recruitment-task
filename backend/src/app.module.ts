@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './controller/app.controller';
-import { AppService } from './service/app.service';
+import { CarController } from './controller/car.controller';
+import { CarService } from './service/car.service';
+import { CarRepository } from './repository/car.repository';
+import { Car } from './entity/car';
 
 @Module({
   imports: [
@@ -19,10 +21,10 @@ import { AppService } from './service/app.service';
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
-      entities: [],
+      entities: [Car],
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [CarController],
+  providers: [CarService, CarRepository],
 })
 export class AppModule {}
