@@ -52,8 +52,16 @@ export class Car {
     return this.brand;
   }
 
+  public setBrand(brand: string): void {
+    this.brand = brand;
+  }
+
   public getLicensePlate(): LicensePlate {
     return this.licensePlate;
+  }
+
+  public setLicensePlate(licensePlate: LicensePlate): void {
+    this.licensePlate = licensePlate;
   }
 
   public getStatus(): CarStatus {

@@ -1,4 +1,4 @@
-import { InvalidLicensePlateException } from 'src/error/invalid.license.plate.exception';
+import { BadRequestException } from '@nestjs/common';
 import { ValueTransformer } from 'typeorm';
 
 export const LicensePlateTransformer: ValueTransformer = {
@@ -11,9 +11,7 @@ export class LicensePlate {
 
   constructor(value: string) {
     if (!this.valid(value)) {
-      throw new InvalidLicensePlateException(
-        'Provide value is empty or not valid.',
-      );
+      throw new BadRequestException('Provide value is empty or not valid.');
     }
 
     this.value = value.toUpperCase();

@@ -1,4 +1,4 @@
-import { InvalidVINException } from 'src/error/invalid.vin.exception';
+import { BadRequestException } from '@nestjs/common';
 import { ValueTransformer } from 'typeorm';
 
 export const VINTransformer: ValueTransformer = {
@@ -11,7 +11,7 @@ export class VIN {
 
   constructor(value: string) {
     if (!this.valid(value)) {
-      throw new InvalidVINException(
+      throw new BadRequestException(
         'Provided value cannot be empty, less than 17 characters or exclude I, O, Q.',
       );
     }

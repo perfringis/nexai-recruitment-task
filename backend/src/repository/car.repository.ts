@@ -19,4 +19,8 @@ export class CarRepository extends Repository<Car> {
       },
     });
   }
+
+  public async deleteByVIN(vin: string): Promise<void> {
+    await this.delete({ vin: vin });
+  }
 }

@@ -1,5 +1,5 @@
+import { BadRequestException } from '@nestjs/common';
 import { LicensePlate } from 'src/entity/license.plate';
-import { InvalidLicensePlateException } from 'src/error/invalid.license.plate.exception';
 
 describe('LicensePlate Test', () => {
   test('should create instance of license plate', () => {
@@ -14,17 +14,13 @@ describe('LicensePlate Test', () => {
     // expect
     expect(() => {
       new LicensePlate('RZ 7728JA');
-    }).toThrow(
-      new InvalidLicensePlateException('Provide value is empty or not valid.'),
-    );
+    }).toThrow(new BadRequestException('Provide value is empty or not valid.'));
   });
 
   test('should not create instance of license plate when value is missing', () => {
     // expect
     expect(() => {
       new LicensePlate('');
-    }).toThrow(
-      new InvalidLicensePlateException('Provide value is empty or not valid.'),
-    );
+    }).toThrow(new BadRequestException('Provide value is empty or not valid.'));
   });
 });

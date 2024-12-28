@@ -1,11 +1,6 @@
 import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateCarDTO {
-  @IsDefined()
-  @IsString()
-  @IsNotEmpty()
-  vin: string;
-
+export class UpdateCarDTO {
   @IsDefined()
   @IsString()
   @IsNotEmpty()

@@ -1,5 +1,5 @@
+import { BadRequestException } from '@nestjs/common';
 import { VIN } from 'src/entity/vin';
-import { InvalidVINException } from 'src/error/invalid.vin.exception';
 
 describe('VIN Test', () => {
   test('should create VIN instance', () => {
@@ -15,7 +15,7 @@ describe('VIN Test', () => {
     expect(() => {
       new VIN('');
     }).toThrow(
-      new InvalidVINException(
+      new BadRequestException(
         'Provided value cannot be empty, less than 17 characters or exclude I, O, Q.',
       ),
     );
@@ -26,7 +26,7 @@ describe('VIN Test', () => {
     expect(() => {
       new VIN('IH4KA4531KC033525');
     }).toThrow(
-      new InvalidVINException(
+      new BadRequestException(
         'Provided value cannot be empty, less than 17 characters or exclude I, O, Q.',
       ),
     );
