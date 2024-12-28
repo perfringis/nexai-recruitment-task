@@ -1,15 +1,15 @@
 import { LicensePlate } from './license.plate';
-import { VehicleIdentificationNumber } from './vehicle.identification.number';
+import { VIN } from './vehicle.identification.number';
 
 export class Car {
   private readonly brand: string;
   private readonly licensePlate: LicensePlate;
-  private readonly vin: VehicleIdentificationNumber;
+  private readonly vin: VIN;
 
   constructor(
     brand: string,
     licensePlate: LicensePlate,
-    vin: VehicleIdentificationNumber,
+    vin: VIN,
   ) {
     this.brand = brand;
     this.licensePlate = licensePlate;
@@ -24,7 +24,7 @@ export class Car {
     return this.licensePlate;
   }
 
-  public getVIN(): VehicleIdentificationNumber {
+  public getVIN(): VIN {
     return this.vin;
   }
 }
