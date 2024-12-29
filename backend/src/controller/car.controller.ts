@@ -66,6 +66,11 @@ export class CarController {
   }
 
   @ApiOperation({ summary: 'Get car by vin number' })
+  @ApiParam({
+    name: 'vin',
+    description: 'VIN of the car to get',
+    type: String,
+  })
   @ApiResponse({
     status: 200,
     description: 'Successfully a car.',
@@ -230,7 +235,7 @@ export class CarController {
   @ApiOperation({ summary: 'Delete a car' })
   @ApiParam({
     name: 'vin',
-    description: 'VIN of the car to update',
+    description: 'VIN of the car to delete',
     type: String,
   })
   @ApiResponse({
