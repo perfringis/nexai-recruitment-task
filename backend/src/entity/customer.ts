@@ -1,20 +1,12 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { Address } from 'src/value-object/address';
 import { LastName, LastNameTransformer } from 'src/value-object/last.name';
 import { FirstName, FirstNameTransformer } from 'src/value-object/first.name';
 import { Email, EmailTransformer } from 'src/value-object/email';
+import { BaseEntity } from './base.entity';
 
 @Entity({ name: 'customer' })
-export class Customer {
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
-
+export class Customer extends BaseEntity {
   @Column({
     name: 'first_name',
     type: 'varchar',
@@ -46,6 +38,8 @@ export class Customer {
     email: Email,
     address: Address,
   ) {
+    super();
+
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;

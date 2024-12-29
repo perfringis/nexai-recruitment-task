@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { VIN, VINTransformer } from 'src/value-object/vin';
 import {
   LicensePlate,
@@ -7,6 +7,7 @@ import {
 import { Customer } from './customer';
 import { Rental } from './rental';
 import { ConflictException } from '@nestjs/common';
+import { BaseEntity } from './base.entity';
 
 export enum CarStatus {
   AVAILABLE = 'available',
@@ -14,10 +15,7 @@ export enum CarStatus {
 }
 
 @Entity({ name: 'car' })
-export class Car {
-  @PrimaryGeneratedColumn('uuid')
-  private id: string;
-
+export class Car extends BaseEntity {
   @Column({ name: 'vin', type: 'varchar', transformer: VINTransformer })
   vin: VIN;
 
@@ -40,6 +38,8 @@ export class Car {
     vin: VIN,
     status: CarStatus,
   ) {
+    super();
+
     this.vin = vin;
     this.brand = brand;
     this.licensePlate = licensePlate;

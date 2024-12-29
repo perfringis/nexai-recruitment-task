@@ -47,7 +47,8 @@ export class RentalService {
     car.return();
     await this.carRepository.save(car);
 
-    const rental: Rental = await this.rentalRepository.findByCar(car);
-    await this.rentalRepository.remove(rental);
+    const rental: Rental = await this.rentalRepository.findByCarId(car.getId());
+    rental.finish();
+    await this.rentalRepository.save(rental);
   }
 }

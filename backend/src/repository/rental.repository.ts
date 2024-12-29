@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Car } from 'src/entity/car';
 import { Rental } from 'src/entity/rental';
 import { DataSource, Repository } from 'typeorm';
 
@@ -9,10 +8,12 @@ export class RentalRepository extends Repository<Rental> {
     super(Rental, dataSource.createEntityManager());
   }
 
-  public async findByCar(car: Car): Promise<Rental> {
+  public async findByCarId(id: string): Promise<Rental> {
     return await this.findOne({
       where: {
-        car: car,
+        car: {
+          id: id,
+        },
       },
     });
   }

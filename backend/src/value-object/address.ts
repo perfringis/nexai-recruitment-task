@@ -1,15 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { BuildingNumber, BuildingNumberTransformer } from './building.number';
 import { City, CityTransformer } from './city';
 import { Country, CountryTransformer } from './country';
 import { PostalCode, PostalCodeTransformer } from './postal.code';
 import { Street, StreetTransformer } from './street';
+import { BaseEntity } from 'src/entity/base.entity';
 
 @Entity({ name: 'address' })
-export class Address {
-  @PrimaryGeneratedColumn('uuid')
-  private id: string;
-
+export class Address extends BaseEntity {
   @Column({
     name: 'street',
     type: 'varchar',
@@ -52,6 +50,8 @@ export class Address {
     postalCode: PostalCode,
     buildingNumber: BuildingNumber,
   ) {
+    super();
+
     this.street = street;
     this.city = city;
     this.postalCode = postalCode;
