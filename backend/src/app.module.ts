@@ -11,6 +11,10 @@ import { CustomerRepository } from './repository/customer.repository';
 import { Address } from './value-object/address';
 import { Customer } from './entity/customer';
 import { AddressRepository } from './repository/address.repository';
+import { RentalController } from './controller/rental.controller';
+import { RentalService } from './service/rental.service';
+import { RentalRepository } from './repository/rental.repository';
+import { Rental } from './entity/rental';
 
 @Module({
   imports: [
@@ -27,19 +31,21 @@ import { AddressRepository } from './repository/address.repository';
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
-      entities: [Address, Car, Customer],
+      entities: [Address, Car, Customer, Rental],
     }),
   ],
-  controllers: [CarController, CustomerController],
+  controllers: [CarController, CustomerController, RentalController],
   providers: [
     // services
     CarService,
     CustomerService,
+    RentalService,
 
     // repositories
     AddressRepository,
     CarRepository,
     CustomerRepository,
+    RentalRepository,
   ],
 })
 export class AppModule {}

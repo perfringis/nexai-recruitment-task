@@ -12,7 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CarDTO } from 'src/dto/car.dto';
-import { CreateCarDTO } from 'src/dto/create.dto';
+import { CreateCarDTO } from 'src/dto/create.car.dto';
 import { UpdateCarDTO } from 'src/dto/update.car.dto';
 import { Car } from 'src/entity/car';
 import { CarService } from 'src/service/car.service';

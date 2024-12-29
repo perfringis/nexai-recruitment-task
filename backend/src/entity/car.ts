@@ -4,6 +4,9 @@ import {
   LicensePlate,
   LicensePlateTransformer,
 } from 'src/value-object/license.plate';
+import { Customer } from './customer';
+import { Rental } from './rental';
+import { ConflictException } from '@nestjs/common';
 
 export enum CarStatus {
   AVAILABLE = 'available',
@@ -77,5 +80,27 @@ export class Car {
 
   public isRented(): boolean {
     return this.status === CarStatus.RENTED;
+  }
+
+  public rent(): void {
+    this.status = CarStatus.RENTED;
+  }
+
+  public return(): void {
+    if (this.isAvailable()) {
+      throw new ConflictException('Car is already returned.');
+    }
+
+    this.status = CarStatus.AVAILABLE;
+  }
+
+  public rentBy(customer: Customer): Rental {
+    if (this.isRented()) {
+      throw new ConflictException('Car is already rented.');
+    }
+
+    this.rent();
+
+    return new Rental(customer, this);
   }
 }
