@@ -10,11 +10,15 @@ export class CustomerDTO {
   lastName: string;
 
   @ApiProperty()
+  email: string;
+
+  @ApiProperty()
   address: AddressDTO;
 
   constructor(customer: Customer) {
     this.firstName = customer.getFirstName().toString();
     this.lastName = customer.getLastName().toString();
+    this.email = customer.getEmail().toString();
     this.address = new AddressDTO(customer.getAddress());
   }
 }
