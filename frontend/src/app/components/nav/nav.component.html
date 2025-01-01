@@ -1,0 +1,7 @@
+<nav class="nav">
+  <ul class="nav__list">
+    @for(item of menu; track item) {
+    <app-nav-item [item]="item"></app-nav-item>
+    }
+  </ul>
+</nav>

@@ -1,0 +1,12 @@
+<label [for]="id" class="label">
+  {{ label }}
+  <input
+    [id]="id"
+    [name]="name"
+    [type]="type"
+    [autocomplete]="autocomplete"
+    class="input"
+    [(ngModel)]="model"
+    (ngModelChange)="onModelChange($event)"
+  />
+</label>

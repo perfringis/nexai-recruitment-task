@@ -1,0 +1,26 @@
+.label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.input {
+  display: block;
+
+  border: 1px solid #2b2b2b;
+  border-radius: 10px;
+  background-color: #1b1b1b;
+
+  margin-top: 10px;
+  font-size: 20px;
+  color: #ffffff;
+
+  width: 100%;
+
+  box-sizing: border-box;
+  padding: 10px 20px;
+}
+
+.input:focus {
+  border: 1px solid #5542f6;
+}

@@ -1,0 +1,5 @@
+<li class="nav__item" [ngClass]="{'nav__item--active': isActive()}">
+  <a class="nav__item__link" [routerLink]="item.href" [title]="item.name">
+    {{ item.name }}
+  </a>
+</li>

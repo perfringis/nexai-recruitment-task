@@ -4,6 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CustomerDTO {
   @ApiProperty()
+  id: string;
+
+  @ApiProperty()
   firstName: string;
 
   @ApiProperty()
@@ -16,6 +19,7 @@ export class CustomerDTO {
   address: AddressDTO;
 
   constructor(customer: Customer) {
+    this.id = customer.getId();
     this.firstName = customer.getFirstName().toString();
     this.lastName = customer.getLastName().toString();
     this.email = customer.getEmail().toString();

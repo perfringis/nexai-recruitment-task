@@ -1,0 +1,49 @@
+.button {
+  font-family: "Courier New", Courier, monospace;
+
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  width: 100%;
+}
+
+.button--edit {
+  background-color: #2c251e;
+  color: #ffa244;
+}
+
+.button--edit:hover {
+  background-color: #cc8136;
+  color: #ffffff;
+}
+
+.button--delete {
+  background-color: #251b1b;
+  color: #f33100;
+}
+
+.button--delete:hover {
+  background-color: #c22700;
+  color: #ffffff;
+}
+
+.button--submit {
+  background-color: #5542f6;
+  color: #ffffff;
+}
+
+.button--submit:hover {
+  background-color: #4434c4;
+}
+
+.button--success {
+  background-color: #21e6c3;
+  color: #ffffff;
+}
+
+.button--success:hover {
+  background-color: #1ab89c;
+  color: #ffffff;
+}

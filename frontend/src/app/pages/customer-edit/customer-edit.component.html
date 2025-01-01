@@ -1,0 +1,9 @@
+<div class="customer-edit-page">
+  <app-customer-edit-form [customer]="customer" (submit)="onSubmit()" />
+
+  <app-success-dialog
+    *ngIf="showDialog"
+    message="Customer saved successfully!"
+    (close)="closeDialog()"
+  ></app-success-dialog>
+</div>

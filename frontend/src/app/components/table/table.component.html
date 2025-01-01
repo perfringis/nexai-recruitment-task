@@ -1,0 +1,39 @@
+<table class="table">
+  <thead class="table__header">
+    <tr>
+      @for(item of header; track item) {
+      <th class="table__header__item">{{ item }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody class="table__body">
+    @for(customer of data; track customer) {
+    <tr>
+      <td class="table__body__item">{{ customer.firstName }}</td>
+      <td class="table__body__item">{{ customer.lastName }}</td>
+      <td class="table__body__item">{{ customer.email }}</td>
+      <td class="table__body__item">{{ customer.address.street }}</td>
+      <td class="table__body__item">{{ customer.address.buildingNumber }}</td>
+      <td class="table__body__item">{{ customer.address.city }}</td>
+      <td class="table__body__item">{{ customer.address.postalCode }}</td>
+      <td class="table__body__item">{{ customer.address.country }}</td>
+      <td class="table__body__item">
+        <app-button
+          [model]="customer"
+          label="Edit"
+          (click)="editCustomer(customer)"
+          class="button button--edit"
+        />
+      </td>
+      <td class="table__body__item">
+        <app-button
+          [model]="customer"
+          label="Delete"
+          (click)="deleteCustomer(customer)"
+          class="button button--delete"
+        />
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
