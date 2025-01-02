@@ -6,8 +6,10 @@ import {
 import { CreateCustomerDTO } from 'src/dto/create.customer.dto';
 import { UpdateCustomerDTO } from 'src/dto/update.customer.dto';
 import { Customer } from 'src/entity/customer';
+import { Rental } from 'src/entity/rental';
 import { AddressRepository } from 'src/repository/address.repository';
 import { CustomerRepository } from 'src/repository/customer.repository';
+import { RentalRepository } from 'src/repository/rental.repository';
 import { Address } from 'src/value-object/address';
 import { BuildingNumber } from 'src/value-object/building.number';
 import { City } from 'src/value-object/city';
@@ -23,6 +25,7 @@ export class CustomerService {
   constructor(
     private readonly customerRepository: CustomerRepository,
     private readonly addressRepository: AddressRepository,
+    private readonly rentalRepository: RentalRepository,
   ) {}
 
   public async getCustomers(): Promise<Customer[]> {
@@ -98,6 +101,13 @@ export class CustomerService {
   }
 
   public async deleteCustomer(id: string): Promise<void> {
+    const rental: Rental = await this.rentalRepository.findByCustomerId(id);
+    if (rental) {
+      throw new ConflictException(
+        'Customer cannot be deleted, because he has active rentals.',
+      );
+    }
+
     const customer: Customer = await this.customerRepository.findById(id);
 
     if (!customer) {

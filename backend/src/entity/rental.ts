@@ -49,5 +49,8 @@ export class Rental extends BaseEntity {
   public finish(): void {
     const now = new Date();
     this.endAt = now;
+
+    this.car = null;
+    this.customer = null;
   }
 }

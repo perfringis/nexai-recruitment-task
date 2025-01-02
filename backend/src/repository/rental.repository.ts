@@ -8,11 +8,21 @@ export class RentalRepository extends Repository<Rental> {
     super(Rental, dataSource.createEntityManager());
   }
 
-  public async findByCarId(id: string): Promise<Rental> {
+  public async findByCarId(carId: string): Promise<Rental> {
     return await this.findOne({
       where: {
         car: {
-          id: id,
+          id: carId,
+        },
+      },
+    });
+  }
+
+  public async findByCustomerId(customerId: string): Promise<Rental> {
+    return await this.findOne({
+      where: {
+        customer: {
+          id: customerId,
         },
       },
     });
