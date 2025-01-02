@@ -16,6 +16,13 @@ export class CustomerService {
   }
 
   public editCustomer(customer: Customer): Observable<Customer> {
-    return this.http.put<Customer>(`${this.HOST}/customer/${customer.id}`, customer);
+    return this.http.put<Customer>(
+      `${this.HOST}/customer/${customer.id}`,
+      customer
+    );
+  }
+
+  public deleteCustomer(customerId: string) {
+    return this.http.delete(`${this.HOST}/customer/${customerId}`);
   }
 }

@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { Customer } from '../../models/customer.model';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
-import { SuccessDialogComponent } from '../../components/success-dialog/success-dialog.component';
 import { CustomerEditFormComponent } from '../../components/customer-edit-form/customer-edit-form.component';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-customer-edit',
   imports: [
-    SuccessDialogComponent,
+    DialogComponent,
     CustomerEditFormComponent,
     CommonModule,
     HeaderComponent,
