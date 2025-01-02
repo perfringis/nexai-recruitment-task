@@ -5,11 +5,11 @@
   />
 
   <app-customer-edit-form [customer]="customer" (submit)="onSubmit()" />
-
-  <app-dialog
-    *ngIf="showDialog"
-    label="Success"
-    message="Customer saved successfully!"
-    (close)="closeDialog()"
-  ></app-dialog>
 </div>
+
+<app-dialog
+  *ngIf="showDialog"
+  label="Success"
+  message="Customer saved successfully!"
+  (close)="closeDialog()"
+></app-dialog>

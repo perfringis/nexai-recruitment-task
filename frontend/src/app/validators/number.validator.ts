@@ -9,6 +9,6 @@ export function NumberValidator(): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     const match = /^[A-Za-z]+$/.test(control.value);
 
-    return of(match).pipe(map((valid) => (valid ? null : { number: true })));
+    return of(match).pipe(map((valid) => (valid ? { number: true } : null)));
   };
 }
