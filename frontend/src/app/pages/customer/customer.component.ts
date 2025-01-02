@@ -22,15 +22,14 @@ export class CustomerComponent implements OnInit {
     'Edit',
     'Delete',
   ];
-  data: Customer[] = [];
+  customers: Customer[] = [];
 
-  
   constructor(private customerService: CustomerService) {}
 
   ngOnInit(): void {
     this.customerService.getCustomers().subscribe(
       (customers) => {
-        this.data = customers;
+        this.customers = customers;
       },
       (error) => {
         console.error('Error fetching customers:', error);

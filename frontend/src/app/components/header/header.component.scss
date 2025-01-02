@@ -1,0 +1,20 @@
+.header {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+
+  min-width: 400px;
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: #ffffff;
+}
+
+.header__title {
+  font-weight: bold;
+}
+
+.header__description {
+  margin-top: 20px;
+  margin-bottom: 60px;
+}

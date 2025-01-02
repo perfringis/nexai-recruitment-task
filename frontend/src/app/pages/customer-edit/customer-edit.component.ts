@@ -5,10 +5,16 @@ import { CustomerService } from '../../services/customer.service';
 import { SuccessDialogComponent } from '../../components/success-dialog/success-dialog.component';
 import { CustomerEditFormComponent } from '../../components/customer-edit-form/customer-edit-form.component';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-customer-edit',
-  imports: [SuccessDialogComponent, CustomerEditFormComponent, CommonModule],
+  imports: [
+    SuccessDialogComponent,
+    CustomerEditFormComponent,
+    CommonModule,
+    HeaderComponent,
+  ],
   templateUrl: './customer-edit.component.html',
   styleUrl: './customer-edit.component.scss',
 })

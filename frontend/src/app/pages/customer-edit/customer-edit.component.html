@@ -1,4 +1,9 @@
 <div class="customer-edit-page">
+  <app-header
+    title="Edit Customer"
+    description="Edit the customer details below."
+  />
+
   <app-customer-edit-form [customer]="customer" (submit)="onSubmit()" />
 
   <app-success-dialog

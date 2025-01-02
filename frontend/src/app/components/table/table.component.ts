@@ -11,7 +11,7 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class TableComponent {
   @Input() header!: string[];
-  @Input() data!: Customer[];
+  @Input() customers!: Customer[];
 
   constructor(private router: Router) {}
 
