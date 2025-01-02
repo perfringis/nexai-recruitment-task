@@ -23,7 +23,6 @@ export class CustomerService {
   }
 
   public createCustomer(customer: Customer): Observable<Customer> {
-    console.log('MK ' + JSON.stringify(customer));
     return this.http.post<Customer>(`${this.HOST}/customer`, customer);
   }
 

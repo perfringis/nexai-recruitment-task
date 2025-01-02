@@ -1,0 +1,58 @@
+<div class="customer-table">
+  <div class="customer-table__header">
+    <app-button label="Create" class="button button--success" (click)="createCustomer()"/>
+  </div>
+  <table class="table">
+    <thead class="table__header">
+      <tr>
+        @for(item of header; track item) {
+        <th class="table__header__item">{{ item }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody class="table__body">
+      @for(customer of customers; track customer) {
+      <tr>
+        <td class="table__column">{{ customer.firstName }}</td>
+        <td class="table__column">{{ customer.lastName }}</td>
+        <td class="table__column">{{ customer.email }}</td>
+        <td class="table__column">{{ customer.address.street }}</td>
+        <td class="table__column">{{ customer.address.buildingNumber }}</td>
+        <td class="table__column">{{ customer.address.city }}</td>
+        <td class="table__column">{{ customer.address.postalCode }}</td>
+        <td class="table__column">{{ customer.address.country }}</td>
+        <td class="table__column">
+          <app-button
+            [model]="customer"
+            label="Edit"
+            (click)="editCustomer(customer)"
+            class="button button--edit"
+          />
+        </td>
+        <td class="table__column">
+          <app-button
+            [model]="customer"
+            label="Delete"
+            (click)="deleteCustomer(customer.id)"
+            class="button button--delete"
+          />
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<app-dialog
+  *ngIf="showSuccessDialog"
+  label="Success"
+  message="Customer deleted successfully!"
+  (close)="closeSuccessDialog()"
+></app-dialog>
+
+<app-dialog
+  *ngIf="showErrorDialog"
+  label="Error"
+  message="Customer cannot be deleted, because he has active rentals!"
+  (close)="closeErrorDialog()"
+></app-dialog>

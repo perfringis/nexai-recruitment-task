@@ -7,12 +7,12 @@ import { CommonModule } from '@angular/common';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'app-table',
+  selector: 'app-customer-table',
   imports: [ButtonComponent, DialogComponent, CommonModule],
-  templateUrl: './table.component.html',
-  styleUrl: './table.component.scss',
+  templateUrl: './customer-table.component.html',
+  styleUrl: './customer-table.component.scss',
 })
-export class TableComponent {
+export class CustomerTableComponent {
   @Input() header!: string[];
   @Input() customers!: Customer[];
 
@@ -42,6 +42,10 @@ export class TableComponent {
         this.showErrorDialog = true;
       }
     );
+  }
+
+  public createCustomer(): void {
+    this.router.navigate(['/customer/new']);
   }
 
   public closeSuccessDialog(): void {

@@ -14,6 +14,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'customer/new',
+    loadComponent: () =>
+      import('./pages/customer-create/customer-create.component').then(
+        (m) => m.CustomerCreateComponent
+      ),
+  },
+  {
     path: 'customer/edit/:id',
     loadComponent: () =>
       import('./pages/customer-edit/customer-edit.component').then(

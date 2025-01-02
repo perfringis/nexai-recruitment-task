@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { TableComponent } from '../../components/table/table.component';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
+import { CustomerTableComponent } from '../../components/customer-table/customer-table.component';
+import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
   selector: 'app-customer',
-  imports: [TableComponent],
+  imports: [CustomerTableComponent],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss',
 })
