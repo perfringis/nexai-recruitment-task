@@ -5,8 +5,9 @@
     [name]="name"
     [type]="type"
     [autocomplete]="autocomplete"
-    class="input"
+    [formControl]="control"
     [(ngModel)]="model"
     (ngModelChange)="onModelChange($event)"
+    class="input"
   />
 </label>
