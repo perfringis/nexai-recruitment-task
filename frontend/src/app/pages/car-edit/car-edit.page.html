@@ -1,0 +1,12 @@
+<div class="car-edit-page">
+  <app-header title="Edit Car" description="Edit the car details below." />
+
+  <car-edit-form [car]="car" (submit)="onSubmit()" />
+</div>
+
+<app-dialog
+  *ngIf="showDialog"
+  label="Success"
+  message="Car saved successfully!"
+  (close)="closeDialog()"
+/>

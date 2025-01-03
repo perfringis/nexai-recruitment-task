@@ -41,7 +41,7 @@ export class CarCreatePage {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.formGroup = this.fb.group({
       vin: [
         '',

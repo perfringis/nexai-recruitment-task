@@ -1,0 +1,52 @@
+<form [formGroup]="formGroup" class="form" (ngSubmit)="onSubmit()">
+  <div class="brand">
+    <app-input
+      id="brand"
+      name="brand"
+      type="text"
+      autocomplete="brand"
+      label="Brand"
+      [control]="brand"
+      [(model)]="car.brand"
+      class="label"
+      required
+    />
+
+    <div
+      *ngIf="brand?.invalid && (brand?.dirty || brand?.touched)"
+      class="form__error"
+    >
+      <div *ngIf="brand?.errors?.['required']">Brand is required</div>
+    </div>
+  </div>
+
+  <div class="license-plate">
+    <app-input
+      id="license-plate"
+      name="license-plate"
+      type="text"
+      autocomplete="brand"
+      label="License Plate"
+      [control]="licensePlate"
+      [(model)]="car.licensePlate"
+      class="label"
+      required
+    />
+
+    <div
+      *ngIf="
+        licensePlate?.invalid && (licensePlate?.dirty || licensePlate?.touched)
+      "
+      class="form__error"
+    >
+      <div *ngIf="licensePlate?.errors?.['required']">
+        License plate is required
+      </div>
+      <div *ngIf="licensePlate?.errors?.['format']">
+        Wrong License plate format
+      </div>
+    </div>
+  </div>
+
+  <app-button type="submit" label="Edit" class="button button--submit" />
+</form>

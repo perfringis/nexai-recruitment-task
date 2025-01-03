@@ -16,7 +16,7 @@ import { NumberValidator } from '../../validators/number.validator';
 import { PostalCodeValidator } from '../../validators/postal.code.validator';
 
 @Component({
-  selector: 'app-customer-edit-form',
+  selector: 'customer-edit-form',
   imports: [
     InputComponent,
     ButtonComponent,
@@ -27,7 +27,7 @@ import { PostalCodeValidator } from '../../validators/postal.code.validator';
   templateUrl: './customer-edit-form.component.html',
   styleUrl: './customer-edit-form.component.scss',
 })
-export class CustomerEditFormComponent implements OnInit {
+export class CustomerEditForm implements OnInit {
   @Input() customer!: Customer;
   @Output() submit = new EventEmitter<void>();
 
@@ -39,36 +39,52 @@ export class CustomerEditFormComponent implements OnInit {
     this.formGroup = this.fb.group({
       firstName: [
         this.customer.firstName,
-        [Validators.required],
-        TextValidator(),
+        {
+          validators: [Validators.required, TextValidator()],
+        },
       ],
       lastName: [
         this.customer.lastName,
-        [Validators.required],
-        TextValidator(),
+        {
+          validators: [Validators.required, TextValidator()],
+        },
       ],
-      email: [this.customer.email, [Validators.required, Validators.email]],
+      email: [
+        this.customer.email,
+        {
+          validators: [Validators.required, Validators.email],
+        },
+      ],
       address: this.fb.group({
-        street: [this.customer.address.street, [Validators.required]],
+        street: [
+          this.customer.address.street,
+          {
+            validators: [Validators.required],
+          },
+        ],
         buildingNumber: [
           this.customer.address.buildingNumber,
-          [Validators.required],
-          NumberValidator(),
+          {
+            validators: [Validators.required, NumberValidator()],
+          },
         ],
         city: [
           this.customer.address.city,
-          [Validators.required],
-          TextValidator(),
+          {
+            validators: [Validators.required, TextValidator()],
+          },
         ],
         country: [
           this.customer.address.country,
-          [Validators.required],
-          TextValidator(),
+          {
+            validators: [Validators.required, TextValidator()],
+          },
         ],
         postalCode: [
           this.customer.address.postalCode,
-          [Validators.required],
-          PostalCodeValidator(),
+          {
+            validators: [Validators.required, PostalCodeValidator()],
+          },
         ],
       }),
     });

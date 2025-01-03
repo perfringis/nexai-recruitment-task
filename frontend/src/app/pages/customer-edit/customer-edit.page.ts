@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Customer } from '../../models/customer.model';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
-import { CustomerEditFormComponent } from '../../components/customer-edit-form/customer-edit-form.component';
+import { CustomerEditForm } from '../../components/customer-edit-form/customer-edit-form.component';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -11,7 +11,7 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
   selector: 'customer-edit-page',
   imports: [
     DialogComponent,
-    CustomerEditFormComponent,
+    CustomerEditForm,
     CommonModule,
     HeaderComponent,
   ],

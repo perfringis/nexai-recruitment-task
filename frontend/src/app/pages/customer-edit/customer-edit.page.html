@@ -4,7 +4,7 @@
     description="Edit the customer details below."
   />
 
-  <app-customer-edit-form [customer]="customer" (submit)="onSubmit()" />
+  <customer-edit-form [customer]="customer" (submit)="onSubmit()" />
 </div>
 
 <app-dialog
@@ -12,4 +12,4 @@
   label="Success"
   message="Customer saved successfully!"
   (close)="closeDialog()"
-></app-dialog>
+/>
