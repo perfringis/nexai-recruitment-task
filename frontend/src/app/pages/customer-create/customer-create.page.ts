@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
-import { Customer } from '../../models/customer.model';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -15,12 +14,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TextValidator } from '../../validators/text.validator';
-import { NumberValidator } from '../../validators/number.validator';
-import { PostalCodeValidator } from '../../validators/postal.code.validator';
 
 @Component({
-  selector: 'app-customer-create',
+  selector: 'customer-create-page',
   imports: [
     CommonModule,
     HeaderComponent,
@@ -30,10 +26,10 @@ import { PostalCodeValidator } from '../../validators/postal.code.validator';
     FormsModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './customer-create.component.html',
-  styleUrl: './customer-create.component.scss',
+  templateUrl: './customer-create.page.html',
+  styleUrl: './customer-create.page.scss',
 })
-export class CustomerCreateComponent {
+export class CustomerCreatePage {
   showDialog = false;
   formGroup!: FormGroup;
 
@@ -61,7 +57,6 @@ export class CustomerCreateComponent {
   public onSubmit(event: Event): void {
     event.preventDefault();
 
-    console.log('Form:', this.formGroup.valid);
     if (this.formGroup.valid) {
       this.customerService.createCustomer(this.formGroup.value).subscribe(
         () => {

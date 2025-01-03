@@ -4,37 +4,34 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/home/home.component').then((m) => m.HomeComponent),
+      import('./pages/home/home.page').then((m) => m.HomePage),
   },
   {
     path: 'customer',
     loadComponent: () =>
-      import('./pages/customer/customer.component').then(
-        (m) => m.CustomerComponent
-      ),
+      import('./pages/customer/customer.page').then((m) => m.CustomerPage),
   },
   {
     path: 'customer/new',
     loadComponent: () =>
-      import('./pages/customer-create/customer-create.component').then(
-        (m) => m.CustomerCreateComponent
+      import('./pages/customer-create/customer-create.page').then(
+        (m) => m.CustomerCreatePage
       ),
   },
   {
     path: 'customer/edit/:id',
     loadComponent: () =>
-      import('./pages/customer-edit/customer-edit.component').then(
-        (m) => m.CustomerEditComponent
+      import('./pages/customer-edit/customer-edit.page').then(
+        (m) => m.CustomerEditPage
       ),
   },
   {
     path: 'car',
-    loadComponent: () =>
-      import('./pages/car/car.component').then((m) => m.CarComponent),
+    loadComponent: () => import('./pages/car/car.page').then((m) => m.CarPage),
   },
   {
     path: 'rental',
     loadComponent: () =>
-      import('./pages/rental/rental.component').then((m) => m.RentalComponent),
+      import('./pages/rental/rental.page').then((m) => m.RentalPage),
   },
 ];

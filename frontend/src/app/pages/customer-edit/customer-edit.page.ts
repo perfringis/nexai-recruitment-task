@@ -8,17 +8,17 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-customer-edit',
+  selector: 'customer-edit-page',
   imports: [
     DialogComponent,
     CustomerEditFormComponent,
     CommonModule,
     HeaderComponent,
   ],
-  templateUrl: './customer-edit.component.html',
-  styleUrl: './customer-edit.component.scss',
+  templateUrl: './customer-edit.page.html',
+  styleUrl: './customer-edit.page.scss',
 })
-export class CustomerEditComponent {
+export class CustomerEditPage {
   customer!: Customer;
   showDialog = false;
 
@@ -35,7 +35,6 @@ export class CustomerEditComponent {
   public onSubmit(): void {
     this.customerService.editCustomer(this.customer).subscribe(
       (customer) => {
-        console.log('Customer edited:', customer);
         this.showDialog = true;
       },
       (error) => {

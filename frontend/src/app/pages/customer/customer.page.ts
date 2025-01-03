@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
 import { CustomerTableComponent } from '../../components/customer-table/customer-table.component';
-import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
-  selector: 'app-customer',
+  selector: 'customer-page',
   imports: [CustomerTableComponent],
-  templateUrl: './customer.component.html',
-  styleUrl: './customer.component.scss',
+  templateUrl: './customer.page.html',
+  styleUrl: './customer.page.scss',
 })
-export class CustomerComponent implements OnInit {
+export class CustomerPage implements OnInit {
   header = [
     'First name',
     'Last name',
