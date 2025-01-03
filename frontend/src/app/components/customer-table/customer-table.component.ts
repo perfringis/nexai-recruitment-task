@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'app-customer-table',
+  selector: 'customer-table',
   imports: [ButtonComponent, DialogComponent, CommonModule],
   templateUrl: './customer-table.component.html',
   styleUrl: './customer-table.component.scss',

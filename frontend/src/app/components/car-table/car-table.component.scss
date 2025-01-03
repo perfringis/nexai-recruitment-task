@@ -1,0 +1,49 @@
+.table {
+  font-family: "Courier New", Courier, monospace;
+
+  background-color: #1b1b1b;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+  border-collapse: separate;
+  padding: 20px;
+
+  margin: 0 auto;
+}
+
+.table__header {
+  color: #979797;
+  font-weight: bold;
+}
+
+.table__header__item {
+  padding: 20px 20px;
+}
+
+.table__body {
+  color: #ffffff;
+}
+
+.table__column {
+  border-top: 1px solid #2b2b2b;
+  text-align: center;
+  padding: 20px 20px;
+}
+
+.car-table {
+
+  width: fit-content;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.car-table__header {
+  width: fit-content;
+  margin-bottom: 20px;
+
+  margin-left: auto;
+}
