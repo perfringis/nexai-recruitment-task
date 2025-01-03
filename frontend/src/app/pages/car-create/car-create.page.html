@@ -1,0 +1,80 @@
+<div class="car-create-page">
+  <app-header title="Create Car" description="Enter the car details below." />
+
+  <form [formGroup]="formGroup" class="form" (ngSubmit)="onSubmit($event)">
+    <div class="vin">
+      <app-input
+        id="vin"
+        name="vin"
+        type="text"
+        autocomplete="vin"
+        label="VIN"
+        [control]="vin"
+        class="label-name"
+        required
+      />
+
+      <div
+        *ngIf="vin?.invalid && (vin?.dirty || vin?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="vin?.errors?.['required']">VIN is required</div>
+        <div *ngIf="vin?.errors?.['format']">Wrong VIN format</div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <app-input
+        id="brand"
+        name="brand"
+        type="text"
+        autocomplete="brand"
+        label="Brand"
+        [control]="brand"
+        class="label-name"
+        required
+      />
+
+      <div
+        *ngIf="brand?.invalid && (brand?.dirty || brand?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="brand?.errors?.['required']">Brand is required</div>
+      </div>
+    </div>
+
+    <div class="license-plate">
+      <app-input
+        id="license-plate"
+        name="license-plate"
+        type="text"
+        autocomplete="brand"
+        label="License Plate"
+        [control]="licensePlate"
+        class="label-name"
+        required
+      />
+
+      <div
+        *ngIf="licensePlate?.invalid && (licensePlate?.dirty || licensePlate?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="licensePlate?.errors?.['required']">
+          License plate is required
+        </div>
+        <div *ngIf="licensePlate?.errors?.['format']">
+          Wrong License plate format
+        </div>
+      </div>
+    </div>
+
+    <app-button type="submit" label="Create" class="button button--submit" />
+  </form>
+</div>
+
+<app-dialog
+  *ngIf="showDialog"
+  label="Success"
+  message="Car created successfully!"
+  (close)="closeDialog()"
+></app-dialog>

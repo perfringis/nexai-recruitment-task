@@ -30,6 +30,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/car/car.page').then((m) => m.CarPage),
   },
   {
+    path: 'car/new',
+    loadComponent: () =>
+      import('./pages/car-create/car-create.page').then((m) => m.CarCreatePage),
+  },
+  {
     path: 'rental',
     loadComponent: () =>
       import('./pages/rental/rental.page').then((m) => m.RentalPage),

@@ -1,14 +1,11 @@
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  ValidationErrors,
-} from '@angular/forms';
-import { map, Observable, of } from 'rxjs';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function TextValidator(): AsyncValidatorFn {
-  return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    const match = /^\d+$/.test(control.value);
+export function TextValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const regex = /\d/;
 
-    return of(match).pipe(map((valid) => (valid ? { text: true } : null)));
+    const isValid = regex.test(control.value);
+
+    return !isValid ? null : { format: true };
   };
 }

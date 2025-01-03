@@ -1,16 +1,14 @@
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  ValidationErrors,
-} from '@angular/forms';
-import { map, Observable, of } from 'rxjs';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function PostalCodeValidator(): AsyncValidatorFn {
-  return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    const match = /^[0-9]{2}-[0-9]{3}$/.test(control.value);
+export function PostalCodeValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) {
+      return null;
+    }
 
-    return of(match).pipe(
-      map((valid) => (valid ? null : { postalCode: true }))
-    );
+    const regex = /^[0-9]{2}-[0-9]{3}$/;
+    const isValid = regex.test(control.value);
+
+    return isValid ? null : { format: true };
   };
 }

@@ -14,6 +14,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { PostalCodeValidator } from '../../validators/postal.code.validator';
+import { TextValidator } from '../../validators/text.validator';
+import { NumberValidator } from '../../validators/number.validator';
 
 @Component({
   selector: 'customer-create-page',
@@ -41,15 +44,55 @@ export class CustomerCreatePage {
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [
+        '',
+        {
+          validators: [Validators.required, TextValidator()],
+        },
+      ],
+      lastName: [
+        '',
+        {
+          validators: [Validators.required, TextValidator()],
+        },
+      ],
+      email: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+        },
+      ],
       address: this.fb.group({
-        street: ['', [Validators.required]],
-        buildingNumber: ['', [Validators.required]],
-        city: ['', [Validators.required]],
-        country: ['', [Validators.required]],
-        postalCode: ['', [Validators.required]],
+        street: [
+          '',
+          {
+            validators: [Validators.required],
+          },
+        ],
+        buildingNumber: [
+          '',
+          {
+            validators: [Validators.required, NumberValidator()],
+          },
+        ],
+        city: [
+          '',
+          {
+            validators: [Validators.required, TextValidator()],
+          },
+        ],
+        country: [
+          '',
+          {
+            validators: [Validators.required, TextValidator()],
+          },
+        ],
+        postalCode: [
+          '',
+          {
+            validators: [Validators.required, PostalCodeValidator()],
+          },
+        ],
       }),
     });
   }
