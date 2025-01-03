@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
-import { DialogComponent } from '../../components/dialog/dialog.component';
 import { InputComponent } from '../../components/input/input.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import {
@@ -18,6 +17,7 @@ import { VINValidator } from '../../validators/vin.validator';
 import { LicensePlateValidator } from '../../validators/license.plate.validator';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'car-create-page',
@@ -39,7 +39,7 @@ export class CarCreatePage {
     private router: Router,
     private carService: CarService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {}
 
   public ngOnInit(): void {
@@ -71,14 +71,15 @@ export class CarCreatePage {
     if (this.formGroup.valid) {
       this.carService.createCar(this.formGroup.value).subscribe(
         () => {
-          this.openDialog({
+          this.dialogService.openDialog({
             title: 'Success',
             message: 'Car created successfully!',
+          }, () => {
+            this.router.navigate(['/car']);
           });
-          this.router.navigate(['/car']);
         },
         (error) => {
-          this.openDialog({
+          this.dialogService.openDialog({
             title: 'Error',
             message: error.error.message,
           });
@@ -87,12 +88,6 @@ export class CarCreatePage {
     } else {
       this.formGroup.markAllAsTouched();
     }
-  }
-
-  public openDialog(data: { title: string; message: string }) {
-    this.dialog.open(CustomDialogComponent, {
-      data,
-    });
   }
 
   get vin(): FormControl {

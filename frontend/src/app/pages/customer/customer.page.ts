@@ -4,6 +4,7 @@ import { Customer } from '../../models/customer.model';
 import { CustomerTableComponent } from '../../components/customer-table/customer-table.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'customer-page',
@@ -28,7 +29,7 @@ export class CustomerPage implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {}
 
   public ngOnInit(): void {
@@ -37,17 +38,11 @@ export class CustomerPage implements OnInit {
         this.customers = customers;
       },
       (error) => {
-        this.openDialog({
+        this.dialogService.openDialog({
           title: 'Error',
           message: error.error.message,
         });
       }
     );
-  }
-
-  public openDialog(data: { title: string; message: string }) {
-    this.dialog.open(CustomDialogComponent, {
-      data,
-    });
   }
 }

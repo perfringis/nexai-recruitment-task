@@ -18,6 +18,7 @@ import { TextValidator } from '../../validators/text.validator';
 import { NumberValidator } from '../../validators/number.validator';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'customer-create-page',
@@ -39,7 +40,7 @@ export class CustomerCreatePage {
     private router: Router,
     private customerService: CustomerService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -103,14 +104,18 @@ export class CustomerCreatePage {
     if (this.formGroup.valid) {
       this.customerService.createCustomer(this.formGroup.value).subscribe(
         () => {
-          this.openDialog({
-            title: 'Success',
-            message: 'Customer created successfully!',
-          });
-          this.router.navigate(['/customer']);
+          this.dialogService.openDialog(
+            {
+              title: 'Success',
+              message: 'Customer created successfully!',
+            },
+            () => {
+              this.router.navigate(['/customer']);
+            }
+          );
         },
         (error) => {
-          this.openDialog({
+          this.dialogService.openDialog({
             title: 'Error',
             message: error.error.message,
           });
@@ -119,12 +124,6 @@ export class CustomerCreatePage {
     } else {
       this.formGroup.markAllAsTouched();
     }
-  }
-
-  public openDialog(data: { title: string; message: string }) {
-    this.dialog.open(CustomDialogComponent, {
-      data,
-    });
   }
 
   get firstName(): FormControl {

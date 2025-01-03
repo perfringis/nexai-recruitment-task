@@ -19,6 +19,7 @@ import { NumberValidator } from '../../validators/number.validator';
 import { PostalCodeValidator } from '../../validators/postal.code.validator';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'customer-edit-page',
@@ -40,8 +41,8 @@ export class CustomerEditPage implements OnInit {
   constructor(
     private router: Router,
     private customerService: CustomerService,
-    private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialogService: DialogService
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state && navigation.extras.state['customer']) {
@@ -108,14 +109,18 @@ export class CustomerEditPage implements OnInit {
     if (this.formGroup.valid) {
       this.customerService.editCustomer(this.customer).subscribe(
         (customer) => {
-          this.openDialog({
-            title: 'Success',
-            message: 'Customer edited successfully!',
-          });
-          this.router.navigate(['/customer']);
+          this.dialogService.openDialog(
+            {
+              title: 'Success',
+              message: 'Customer edited successfully!',
+            },
+            () => {
+              this.router.navigate(['/customer']);
+            }
+          );
         },
         (error) => {
-          this.openDialog({
+          this.dialogService.openDialog({
             title: 'Error',
             message: error.error.message,
           });
@@ -124,12 +129,6 @@ export class CustomerEditPage implements OnInit {
     } else {
       this.formGroup.markAllAsTouched();
     }
-  }
-
-  public openDialog(data: { title: string; message: string }) {
-    this.dialog.open(CustomDialogComponent, {
-      data,
-    });
   }
 
   get firstName(): FormControl {
