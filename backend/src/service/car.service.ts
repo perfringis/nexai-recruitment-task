@@ -6,13 +6,18 @@ import {
 import { CreateCarDTO } from 'src/dto/create.car.dto';
 import { UpdateCarDTO } from 'src/dto/update.car.dto';
 import { Car, CarStatus } from 'src/entity/car';
+import { Rental } from 'src/entity/rental';
 import { CarRepository } from 'src/repository/car.repository';
+import { RentalRepository } from 'src/repository/rental.repository';
 import { LicensePlate } from 'src/value-object/license.plate';
 import { VIN } from 'src/value-object/vin';
 
 @Injectable()
 export class CarService {
-  constructor(private readonly carRepository: CarRepository) {}
+  constructor(
+    private readonly carRepository: CarRepository,
+    private readonly rentalRepository: RentalRepository,
+  ) {}
 
   public async getCars(): Promise<Car[]> {
     return await this.carRepository.find({});
@@ -60,6 +65,13 @@ export class CarService {
 
   public async deleteCar(vin: string): Promise<void> {
     const car: Car = await this.carRepository.findByVIN(vin);
+
+    const rental: Rental = await this.rentalRepository.findByCarId(car.id);
+    if (rental) {
+      throw new ConflictException(
+        'Car is rented, cannot be deleted, vin = ' + vin,
+      );
+    }
 
     if (!car) {
       throw new NotFoundException('Car does not exists, vin = ' + vin);
