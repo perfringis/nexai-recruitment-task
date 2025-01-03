@@ -3,10 +3,6 @@
 }
 
 .form {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 20px;
-  color: #ffffff;
-
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 100px);
