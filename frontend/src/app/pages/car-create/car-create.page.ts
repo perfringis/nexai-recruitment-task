@@ -80,7 +80,7 @@ export class CarCreatePage {
         (error) => {
           this.openDialog({
             title: 'Error',
-            message: error.message,
+            message: error.error.message,
           });
         }
       );

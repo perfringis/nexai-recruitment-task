@@ -5,10 +5,12 @@ import { ButtonComponent } from '../button/button.component';
 import { CustomerService } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'customer-table',
-  imports: [ButtonComponent, DialogComponent, CommonModule],
+  imports: [ButtonComponent, CommonModule],
   templateUrl: './customer-table.component.html',
   styleUrl: './customer-table.component.scss',
 })
@@ -16,13 +18,15 @@ export class CustomerTableComponent {
   @Input() header!: string[];
   @Input() customers!: Customer[];
 
-  showSuccessDialog = false;
-  showErrorDialog = false;
-
   constructor(
     private router: Router,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private dialog: MatDialog
   ) {}
+
+  public createCustomer(): void {
+    this.router.navigate(['/customer/new']);
+  }
 
   public editCustomer(customer: Customer): void {
     this.router.navigate([`/customer/edit/${customer.id}`], {
@@ -36,23 +40,23 @@ export class CustomerTableComponent {
         this.customers = this.customers.filter(
           (customer) => customer.id !== customerId
         );
-        this.showSuccessDialog = true;
+        this.openDialog({
+          title: 'Success',
+          message: 'Customer created successfully!',
+        });
       },
       (error) => {
-        this.showErrorDialog = true;
+        this.openDialog({
+          title: 'Error',
+          message: error.error.message,
+        });
       }
     );
   }
 
-  public createCustomer(): void {
-    this.router.navigate(['/customer/new']);
-  }
-
-  public closeSuccessDialog(): void {
-    this.showSuccessDialog = false;
-  }
-
-  public closeErrorDialog(): void {
-    this.showErrorDialog = false;
+  public openDialog(data: { title: string; message: string }) {
+    this.dialog.open(CustomDialogComponent, {
+      data,
+    });
   }
 }

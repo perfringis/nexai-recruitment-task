@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../button/button.component';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from '../dialog/dialog.component';
 import { Car } from '../../models/car.model';
 import { CarService } from '../../services/car.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'car-table',
-  imports: [ButtonComponent, DialogComponent, CommonModule],
+  imports: [ButtonComponent, CommonModule],
   templateUrl: './car-table.component.html',
   styleUrl: './car-table.component.scss',
 })
@@ -16,10 +17,11 @@ export class CarTableComponent {
   @Input() header!: string[];
   @Input() cars!: Car[];
 
-  showSuccessDialog = false;
-  showErrorDialog = false;
-
-  constructor(private router: Router, private carService: CarService) {}
+  constructor(
+    private router: Router,
+    private carService: CarService,
+    private dialog: MatDialog
+  ) {}
 
   public createCar(): void {
     this.router.navigate(['/car/new']);
@@ -35,19 +37,23 @@ export class CarTableComponent {
     this.carService.deleteCar(vin).subscribe(
       () => {
         this.cars = this.cars.filter((car) => car.vin !== vin);
-        this.showSuccessDialog = true;
+        this.openDialog({
+          title: 'Success',
+          message: 'Car created successfully!',
+        });
       },
       (error) => {
-        this.showErrorDialog = true;
+        this.openDialog({
+          title: 'Error',
+          message: error.error.message,
+        });
       }
     );
   }
 
-  public closeSuccessDialog(): void {
-    this.showSuccessDialog = false;
-  }
-
-  public closeErrorDialog(): void {
-    this.showErrorDialog = false;
+  public openDialog(data: { title: string; message: string }) {
+    this.dialog.open(CustomDialogComponent, {
+      data,
+    });
   }
 }

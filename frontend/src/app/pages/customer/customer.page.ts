@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
 import { CustomerTableComponent } from '../../components/customer-table/customer-table.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'customer-page',
@@ -24,7 +26,10 @@ export class CustomerPage implements OnInit {
   ];
   customers: Customer[] = [];
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private dialog: MatDialog
+  ) {}
 
   public ngOnInit(): void {
     this.customerService.getCustomers().subscribe(
@@ -32,8 +37,17 @@ export class CustomerPage implements OnInit {
         this.customers = customers;
       },
       (error) => {
-        console.error('Error fetching customers:', error);
+        this.openDialog({
+          title: 'Error',
+          message: error.error.message,
+        });
       }
     );
+  }
+
+  public openDialog(data: { title: string; message: string }) {
+    this.dialog.open(CustomDialogComponent, {
+      data,
+    });
   }
 }

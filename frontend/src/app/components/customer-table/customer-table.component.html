@@ -1,6 +1,10 @@
 <div class="customer-table">
   <div class="customer-table__header">
-    <app-button label="Create" class="button button--success" (click)="createCustomer()"/>
+    <app-button
+      label="Create"
+      class="button button--success"
+      (click)="createCustomer()"
+    />
   </div>
   <table class="table">
     <thead class="table__header">
@@ -42,17 +46,3 @@
     </tbody>
   </table>
 </div>
-
-<app-dialog
-  *ngIf="showSuccessDialog"
-  label="Success"
-  message="Customer deleted successfully!"
-  (close)="closeSuccessDialog()"
-></app-dialog>
-
-<app-dialog
-  *ngIf="showErrorDialog"
-  label="Error"
-  message="Customer cannot be deleted, because he has active rentals!"
-  (close)="closeErrorDialog()"
-></app-dialog>

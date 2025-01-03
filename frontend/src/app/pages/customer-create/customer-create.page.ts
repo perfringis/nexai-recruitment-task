@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
-import { DialogComponent } from '../../components/dialog/dialog.component';
 import { InputComponent } from '../../components/input/input.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import {
@@ -113,7 +112,7 @@ export class CustomerCreatePage {
         (error) => {
           this.openDialog({
             title: 'Error',
-            message: error.message,
+            message: error.error.message,
           });
         }
       );
