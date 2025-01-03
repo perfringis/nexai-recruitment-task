@@ -1,30 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
-import { DialogComponent } from '../../components/dialog/dialog.component';
 import { CarService } from '../../services/car.service';
 import { Car } from '../../models/car.model';
-import { CarEditForm } from '../../components/car-edit-form/car-edit-form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
+import { ButtonComponent } from '../../components/button/button.component';
+import { InputComponent } from '../../components/input/input.component';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { VINValidator } from '../../validators/vin.validator';
+import { LicensePlateValidator } from '../../validators/license.plate.validator';
 
 @Component({
   selector: 'car-edit-page',
   imports: [
-    DialogComponent,
-    CarEditForm,
     CommonModule,
     HeaderComponent,
+    ButtonComponent,
+    InputComponent,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './car-edit.page.html',
   styleUrl: './car-edit.page.scss',
 })
-export class CarEditPage {
+export class CarEditPage implements OnInit {
   car!: Car;
-  showDialog = false;
+  formGroup!: FormGroup;
 
   constructor(
     private router: Router,
-    private carService: CarService
+    private carService: CarService,
+    private dialog: MatDialog,
+    private fb: FormBuilder
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state && navigation.extras.state['car']) {
@@ -32,19 +48,61 @@ export class CarEditPage {
     }
   }
 
+  public ngOnInit(): void {
+    this.formGroup = this.fb.group({
+      vin: [
+        this.car.vin,
+        {
+          validators: [Validators.required, VINValidator()],
+        },
+      ],
+      brand: [
+        this.car.brand,
+        {
+          validators: [Validators.required],
+        },
+      ],
+      licensePlate: [
+        this.car.licensePlate,
+        {
+          validators: [Validators.required, LicensePlateValidator()],
+        },
+      ],
+    });
+  }
+
   public onSubmit(): void {
     this.carService.editCar(this.car).subscribe(
       (car) => {
-        this.showDialog = true;
+        this.openDialog({
+          title: 'Success',
+          message: 'Car edited successfully!',
+        });
       },
       (error) => {
-        console.error('Error editing car:', error);
+        this.openDialog({
+          title: 'Error',
+          message: error.message,
+        });
       }
     );
   }
 
-  public closeDialog(): void {
-    this.showDialog = false;
-    this.router.navigate(['/car']);
+  public openDialog(data: { title: string; message: string }) {
+    this.dialog.open(CustomDialogComponent, {
+      data,
+    });
+  }
+
+  get vin(): FormControl {
+    return this.formGroup.get('vin') as FormControl;
+  }
+
+  get brand(): FormControl {
+    return this.formGroup.get('brand') as FormControl;
+  }
+
+  get licensePlate(): FormControl {
+    return this.formGroup.get('licensePlate') as FormControl;
   }
 }
