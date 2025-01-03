@@ -72,20 +72,25 @@ export class CarEditPage implements OnInit {
   }
 
   public onSubmit(): void {
-    this.carService.editCar(this.car).subscribe(
-      (car) => {
-        this.openDialog({
-          title: 'Success',
-          message: 'Car edited successfully!',
-        });
-      },
-      (error) => {
-        this.openDialog({
-          title: 'Error',
-          message: error.message,
-        });
-      }
-    );
+    if (this.formGroup.valid) {
+      this.carService.editCar(this.car).subscribe(
+        (car) => {
+          this.openDialog({
+            title: 'Success',
+            message: 'Car edited successfully!',
+          });
+          this.router.navigate(['/car']);
+        },
+        (error) => {
+          this.openDialog({
+            title: 'Error',
+            message: error.message,
+          });
+        }
+      );
+    } else {
+      this.formGroup.markAllAsTouched();
+    }
   }
 
   public openDialog(data: { title: string; message: string }) {

@@ -105,20 +105,25 @@ export class CustomerEditPage implements OnInit {
   }
 
   public onSubmit(): void {
-    this.customerService.editCustomer(this.customer).subscribe(
-      (customer) => {
-        this.openDialog({
-          title: 'Success',
-          message: 'Customer edited successfully!',
-        });
-      },
-      (error) => {
-        this.openDialog({
-          title: 'Error',
-          message: error.message,
-        });
-      }
-    );
+    if (this.formGroup.valid) {
+      this.customerService.editCustomer(this.customer).subscribe(
+        (customer) => {
+          this.openDialog({
+            title: 'Success',
+            message: 'Customer edited successfully!',
+          });
+          this.router.navigate(['/customer']);
+        },
+        (error) => {
+          this.openDialog({
+            title: 'Error',
+            message: error.message,
+          });
+        }
+      );
+    } else {
+      this.formGroup.markAllAsTouched();
+    }
   }
 
   public openDialog(data: { title: string; message: string }) {
