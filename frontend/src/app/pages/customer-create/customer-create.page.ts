@@ -17,13 +17,14 @@ import {
 import { PostalCodeValidator } from '../../validators/postal.code.validator';
 import { TextValidator } from '../../validators/text.validator';
 import { NumberValidator } from '../../validators/number.validator';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'customer-create-page',
   imports: [
     CommonModule,
     HeaderComponent,
-    DialogComponent,
     InputComponent,
     ButtonComponent,
     FormsModule,
@@ -33,13 +34,13 @@ import { NumberValidator } from '../../validators/number.validator';
   styleUrl: './customer-create.page.scss',
 })
 export class CustomerCreatePage {
-  showDialog = false;
   formGroup!: FormGroup;
 
   constructor(
     private router: Router,
     private customerService: CustomerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -103,10 +104,17 @@ export class CustomerCreatePage {
     if (this.formGroup.valid) {
       this.customerService.createCustomer(this.formGroup.value).subscribe(
         () => {
-          this.showDialog = true;
+          this.openDialog({
+            title: 'Success',
+            message: 'Customer created successfully!',
+          });
+          this.router.navigate(['/customer']);
         },
         (error) => {
-          console.error('Error creating customer:', error);
+          this.openDialog({
+            title: 'Error',
+            message: error.message,
+          });
         }
       );
     } else {
@@ -114,9 +122,10 @@ export class CustomerCreatePage {
     }
   }
 
-  public closeDialog(): void {
-    this.showDialog = false;
-    this.router.navigate(['/customer']);
+  public openDialog(data: { title: string; message: string }) {
+    this.dialog.open(CustomDialogComponent, {
+      data,
+    });
   }
 
   get firstName(): FormControl {

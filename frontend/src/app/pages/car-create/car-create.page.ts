@@ -16,13 +16,14 @@ import {
 import { CarService } from '../../services/car.service';
 import { VINValidator } from '../../validators/vin.validator';
 import { LicensePlateValidator } from '../../validators/license.plate.validator';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'car-create-page',
   imports: [
     CommonModule,
     HeaderComponent,
-    DialogComponent,
     InputComponent,
     ButtonComponent,
     FormsModule,
@@ -32,13 +33,13 @@ import { LicensePlateValidator } from '../../validators/license.plate.validator'
   styleUrl: './car-create.page.scss',
 })
 export class CarCreatePage {
-  showDialog = false;
   formGroup!: FormGroup;
 
   constructor(
     private router: Router,
     private carService: CarService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -70,10 +71,17 @@ export class CarCreatePage {
     if (this.formGroup.valid) {
       this.carService.createCar(this.formGroup.value).subscribe(
         () => {
-          this.showDialog = true;
+          this.openDialog({
+            title: 'Success',
+            message: 'Car created successfully!',
+          });
+          this.router.navigate(['/car']);
         },
         (error) => {
-          console.error('Error creating car:', error);
+          this.openDialog({
+            title: 'Error',
+            message: error.message,
+          });
         }
       );
     } else {
@@ -81,9 +89,10 @@ export class CarCreatePage {
     }
   }
 
-  public closeDialog(): void {
-    this.showDialog = false;
-    this.router.navigate(['/car']);
+  public openDialog(data: { title: string; message: string }) {
+    this.dialog.open(CustomDialogComponent, {
+      data,
+    });
   }
 
   get vin(): FormControl {
