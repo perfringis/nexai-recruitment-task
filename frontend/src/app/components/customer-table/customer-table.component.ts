@@ -4,9 +4,7 @@ import { Customer } from '../../models/customer.model';
 import { ButtonComponent } from '../button/button.component';
 import { CustomerService } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from '../dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'customer-table',
@@ -21,7 +19,7 @@ export class CustomerTableComponent {
   constructor(
     private router: Router,
     private customerService: CustomerService,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {}
 
   public createCustomer(): void {
@@ -40,23 +38,17 @@ export class CustomerTableComponent {
         this.customers = this.customers.filter(
           (customer) => customer.id !== customerId
         );
-        this.openDialog({
+        this.dialogService.openDialog({
           title: 'Success',
-          message: 'Customer created successfully!',
+          message: 'Customer deleted successfully!',
         });
       },
       (error) => {
-        this.openDialog({
+        this.dialogService.openDialog({
           title: 'Error',
           message: error.error.message,
         });
       }
     );
-  }
-
-  public openDialog(data: { title: string; message: string }) {
-    this.dialog.open(CustomDialogComponent, {
-      data,
-    });
   }
 }

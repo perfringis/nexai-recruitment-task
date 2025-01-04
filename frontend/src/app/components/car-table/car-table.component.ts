@@ -4,8 +4,7 @@ import { ButtonComponent } from '../button/button.component';
 import { CommonModule } from '@angular/common';
 import { Car } from '../../models/car.model';
 import { CarService } from '../../services/car.service';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'car-table',
@@ -20,7 +19,7 @@ export class CarTableComponent {
   constructor(
     private router: Router,
     private carService: CarService,
-    private dialog: MatDialog
+        private dialogService: DialogService
   ) {}
 
   public createCar(): void {
@@ -37,23 +36,17 @@ export class CarTableComponent {
     this.carService.deleteCar(vin).subscribe(
       () => {
         this.cars = this.cars.filter((car) => car.vin !== vin);
-        this.openDialog({
+        this.dialogService.openDialog({
           title: 'Success',
-          message: 'Car created successfully!',
+          message: 'Car deleted successfully!',
         });
       },
       (error) => {
-        this.openDialog({
+        this.dialogService.openDialog({
           title: 'Error',
           message: error.error.message,
         });
       }
     );
-  }
-
-  public openDialog(data: { title: string; message: string }) {
-    this.dialog.open(CustomDialogComponent, {
-      data,
-    });
   }
 }
