@@ -44,4 +44,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/rental/rental.page').then((m) => m.RentalPage),
   },
+  {
+    path: 'rental/new',
+    loadComponent: () =>
+      import('./pages/rental-create/rental-create.page').then(
+        (m) => m.RentalCreatePage
+      ),
+  },
 ];

@@ -1,0 +1,53 @@
+.combobox__container {
+  position: relative;
+  background-color: #1b1b1b;
+
+  width: fit-content;
+
+  border-radius: 10px;
+}
+
+.combobox__header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  border: 1px solid #2b2b2b;
+}
+
+.combobox__input {
+  border: none;
+  outline: none;
+
+  color: #ffffff;
+  background-color: #1b1b1b;
+}
+
+.dropdown__icon {
+  margin-left: 10px;
+  color: #ffffff;
+}
+
+.dropdown__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  background: #1b1b1b;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+.dropdown__item {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.dropdown__item:hover {
+  background-color: #2b2b2b;
+  color: #ffffff;
+}

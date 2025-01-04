@@ -1,0 +1,18 @@
+<div class="car-table">
+  <table class="table">
+    <thead class="table__header">
+      <tr>
+        @for(item of header; track item) {
+        <th class="table__header__item">{{ item }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody class="table__body">
+      <tr>
+        <td class="table__column">{{ car.vin }}</td>
+        <td class="table__column">{{ car.brand }}</td>
+        <td class="table__column">{{ car.licensePlate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,22 @@
+<div class="combobox__container">
+  <div class="combobox__header" (click)="toggleDropdown()">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="filterCustomers()"
+      placeholder="Select customer"
+      class="combobox__input"
+    />
+        <button *ngIf="searchText" (click)="clearSelection()">✖</button>
+    <span class="dropdown__icon">{{ isOpen ? "▲" : "▼" }}</span>
+  </div>
+  <ul class="dropdown__list" *ngIf="isOpen">
+    <li
+      *ngFor="let customer of filteredCustomers"
+      (click)="selectCustomer(customer)"
+      class="dropdown__item"
+    >
+      {{ customer.firstName }} {{ customer.lastName }}
+    </li>
+  </ul>
+</div>

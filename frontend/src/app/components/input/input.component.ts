@@ -14,6 +14,7 @@ export class InputComponent {
   @Input() autocomplete!: string;
   @Input() label!: string;
   @Input() control!: FormControl;
+  @Input() readonly!: boolean;
 
   @Input() model!: string;
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -30,7 +30,7 @@ import { DialogService } from '../../services/dialog.service';
   templateUrl: './car-create.page.html',
   styleUrl: './car-create.page.scss',
 })
-export class CarCreatePage {
+export class CarCreatePage implements OnInit {
   formGroup!: FormGroup;
 
   constructor(
@@ -69,12 +69,15 @@ export class CarCreatePage {
     if (this.formGroup.valid) {
       this.carService.createCar(this.formGroup.value).subscribe(
         () => {
-          this.dialogService.openDialog({
-            title: 'Success',
-            message: 'Car created successfully!',
-          }, () => {
-            this.router.navigate(['/car']);
-          });
+          this.dialogService.openDialog(
+            {
+              title: 'Success',
+              message: 'Car created successfully!',
+            },
+            () => {
+              this.router.navigate(['/car']);
+            }
+          );
         },
         (error) => {
           this.dialogService.openDialog({

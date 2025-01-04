@@ -61,7 +61,7 @@ export class CarTableComponent {
             message: 'Car returned successfully!',
           },
           () => {
-            this.router.navigate(['/car']);
+            this.router.navigate(['/rental']);
           }
         );
       },
