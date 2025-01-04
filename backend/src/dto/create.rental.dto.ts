@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
 import { IsVIN } from 'src/validation/vin.validator';
+import { CreateCustomerDTO } from './create.customer.dto';
 
 export class CreateRentalDTO {
   @ApiProperty()
   @IsDefined()
-  @IsString()
   @IsNotEmpty()
-  customerId: string;
+  customer: CreateCustomerDTO;
 
   @ApiProperty()
   @IsDefined()
