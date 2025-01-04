@@ -11,7 +11,7 @@ import { DialogService } from '../../services/dialog.service';
   styleUrl: './car.page.scss',
 })
 export class CarPage {
-  header = ['VIN', 'Brand', 'License plate', 'Status', 'Edit', 'Delete'];
+  header = ['VIN', 'Brand', 'License plate', 'Status', 'Edit', 'Delete', 'Rent/Return'];
   cars: Car[] = [];
 
   constructor(

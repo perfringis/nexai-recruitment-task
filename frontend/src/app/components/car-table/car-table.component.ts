@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Car } from '../../models/car.model';
 import { CarService } from '../../services/car.service';
 import { DialogService } from '../../services/dialog.service';
+import { RentalService } from '../../services/rental.service';
 
 @Component({
   selector: 'car-table',
@@ -19,7 +20,8 @@ export class CarTableComponent {
   constructor(
     private router: Router,
     private carService: CarService,
-        private dialogService: DialogService
+    private rentalService: RentalService,
+    private dialogService: DialogService
   ) {}
 
   public createCar(): void {
@@ -48,5 +50,33 @@ export class CarTableComponent {
         });
       }
     );
+  }
+
+  public returnCar(vin: string): void {
+    this.rentalService.returnCar(vin).subscribe(
+      () => {
+        this.dialogService.openDialog(
+          {
+            title: 'Success',
+            message: 'Car returned successfully!',
+          },
+          () => {
+            this.router.navigate(['/car']);
+          }
+        );
+      },
+      (error) => {
+        this.dialogService.openDialog({
+          title: 'Error',
+          message: error.error.message,
+        });
+      }
+    );
+  }
+
+  public rentCar(car: Car): void {
+    this.router.navigate(['/rental/new'], {
+      state: { car },
+    });
   }
 }

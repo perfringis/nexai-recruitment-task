@@ -1,6 +1,10 @@
 <div class="car-table">
   <div class="car-table__header">
-    <app-button label="Create" class="button button--success" (click)="createCar()"/>
+    <app-button
+      label="Create"
+      class="button button--success"
+      (click)="createCar()"
+    />
   </div>
   <table class="table">
     <thead class="table__header">
@@ -32,6 +36,13 @@
             (click)="deleteCar(car.vin)"
             class="button button--delete"
           />
+        </td>
+        <td class="table__column">
+          @if(car.status === 'rented') {
+          <app-button label="Return" (click)="returnCar(car.vin)" class="button button--action" />
+          } @if(car.status === 'available') {
+          <app-button label="Rent" (click)="rentCar(car)" class="button button--action" />
+          }
         </td>
       </tr>
       }
