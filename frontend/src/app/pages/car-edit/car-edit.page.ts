@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { CarService } from '../../services/car.service';
 import { Car } from '../../models/car.model';
-import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { InputComponent } from '../../components/input/input.component';
 import {

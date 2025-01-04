@@ -16,8 +16,6 @@ import {
 import { PostalCodeValidator } from '../../validators/postal.code.validator';
 import { TextValidator } from '../../validators/text.validator';
 import { NumberValidator } from '../../validators/number.validator';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 import { DialogService } from '../../services/dialog.service';
 
 @Component({

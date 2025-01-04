@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
 import { CustomerTableComponent } from '../../components/customer-table/customer-table.component';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 import { DialogService } from '../../services/dialog.service';
 
 @Component({
@@ -29,7 +27,7 @@ export class CustomerPage implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
   ) {}
 
   public ngOnInit(): void {

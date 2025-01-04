@@ -15,8 +15,6 @@ import {
 import { CarService } from '../../services/car.service';
 import { VINValidator } from '../../validators/vin.validator';
 import { LicensePlateValidator } from '../../validators/license.plate.validator';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomDialogComponent } from '../../components/custom-dialog/custom-dialog.component';
 import { DialogService } from '../../services/dialog.service';
 
 @Component({
