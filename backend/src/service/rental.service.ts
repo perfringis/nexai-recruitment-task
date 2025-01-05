@@ -26,6 +26,10 @@ export class RentalService {
     private readonly addressRepository: AddressRepository,
   ) {}
 
+  public async getActiveRentals(): Promise<Rental[]> {
+    return await this.rentalRepository.findActiveRentals();
+  }
+
   public async rent(dto: CreateRentalDTO): Promise<Rental> {
     const car: Car = await this.carRepository.findByVIN(dto.vin);
     if (!car) {

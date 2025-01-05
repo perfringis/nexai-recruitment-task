@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   HttpStatus,
   InternalServerErrorException,
   NotFoundException,
@@ -27,9 +28,54 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('Rental')
-@Controller('/rental')
+@Controller()
 export class RentalController {
   constructor(private readonly rentalService: RentalService) {}
+
+  @ApiOperation({ summary: 'Get active rentals' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully fetched all active rentals.',
+    type: [RentalDTO],
+    example: [
+      {
+        startAt: '2025-01-05T11:59:26.000Z',
+        endAt: '2026-01-05T11:59:26.000Z',
+        car: {
+          vin: 'JH4KA4531KC033525',
+          brand: 'BMW',
+          licensePlate: 'RZ 7728J',
+        },
+        customer: {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@doe.com',
+          address: {
+            street: 'Świętokrzyska',
+            city: 'Warszawa',
+            country: 'Polska',
+            postalCode: '00-001',
+            buildingNumber: '33',
+          },
+        },
+      },
+    ],
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error.',
+    type: InternalServerErrorException,
+    example: {
+      message: 'Internal Server Error',
+      statusCode: 500,
+    },
+  })
+  @Get('/rentals/active')
+  public async getActiveRentals(): Promise<RentalDTO[]> {
+    const rentals: Rental[] = await this.rentalService.getActiveRentals();
+
+    return this.toDTOs(rentals);
+  }
 
   @ApiOperation({ summary: 'Rent a car' })
   @ApiBody({
@@ -90,7 +136,7 @@ export class RentalController {
       statusCode: 500,
     },
   })
-  @Post()
+  @Post('/rental')
   @UsePipes(ValidationPipe)
   public async rent(@Body() dto: CreateRentalDTO): Promise<RentalDTO> {
     const rental: Rental = await this.rentalService.rent(dto);
@@ -99,7 +145,6 @@ export class RentalController {
   }
 
   @ApiOperation({ summary: 'Return a car' })
-  @Put('/:vin/return')
   @ApiParam({
     name: 'vin',
     description: 'VIN of the car to return',
@@ -142,6 +187,7 @@ export class RentalController {
       statusCode: 500,
     },
   })
+  @Put('rental/:vin/return')
   public async return(
     @Param('vin', VINValidationPipe) vin: string,
     @Res() response: Response,
@@ -155,5 +201,9 @@ export class RentalController {
 
   private toDTO(rental: Rental): RentalDTO {
     return new RentalDTO(rental);
+  }
+
+  private toDTOs(rentals: Rental[]): RentalDTO[] {
+    return rentals.map((rental) => this.toDTO(rental));
   }
 }
