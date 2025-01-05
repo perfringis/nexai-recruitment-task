@@ -21,7 +21,7 @@ import { Rental } from './entity/rental';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '127.0.0.1',
+      host: process.env.DATABASE_HOST || '127.0.0.1',
       port: process.env.DATABASE_PORT
         ? parseInt(process.env.DATABASE_PORT, 10)
         : 3306,

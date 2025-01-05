@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: frontend
+    image: node:lts-alpine
+    ports:
+      - 4200:4200
+    working_dir: /usr/src/app
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm run start --host 0.0.0.0"
+    networks:
+      - rental_network
+    volumes:
+      - ./frontend:/usr/src/app
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    image: node:lts-alpine
+    ports:
+      - 3000:3000
+    working_dir: /usr/src/app
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm run start:dev"
+    networks:
+      - rental_network
+    volumes:
+      - ./backend:/usr/src/app
+    restart: unless-stopped
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    ports:
+      - 3303:3306
+    environment:
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+    networks:
+      - rental_network
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+networks:
+  rental_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
