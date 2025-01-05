@@ -1,0 +1,23 @@
+<div class="customer-table">
+  <table class="table">
+    <thead class="table__header">
+      <tr>
+        @for(item of header; track item) {
+        <th class="table__header__item">{{ item }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody class="table__body">
+      @for(rental of rentals; track rental) {
+      <tr>
+        <td class="table__column">{{ rental.customer.firstName }}</td>
+        <td class="table__column">{{ rental.customer.lastName }}</td>
+        <td class="table__column">{{ rental.car.vin }}</td>
+        <td class="table__column">{{ rental.car.brand }}</td>
+        <td class="table__column">{{ rental.startAt }}</td>
+        <td class="table__column">{{ rental.endAt }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

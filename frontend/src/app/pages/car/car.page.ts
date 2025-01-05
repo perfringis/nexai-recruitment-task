@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car.model';
 import { CarService } from '../../services/car.service';
 import { CarTableComponent } from '../../components/car-table/car-table.component';
@@ -10,7 +10,7 @@ import { DialogService } from '../../services/dialog.service';
   templateUrl: './car.page.html',
   styleUrl: './car.page.scss',
 })
-export class CarPage {
+export class CarPage implements OnInit {
   header = ['VIN', 'Brand', 'License plate', 'Status', 'Edit', 'Delete', 'Rent/Return'];
   cars: Car[] = [];
 
