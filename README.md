@@ -7,7 +7,7 @@
 - [Setup locally](#setup-locally)
 - [Docker setup](#docker-setup)
 - [Swagger documentation](#swagger-documentation)
-- [Tests](#tests)
+- [Tests](#backend-tests)
 
 ## Setup locally
 
