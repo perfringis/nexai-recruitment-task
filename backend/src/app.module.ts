@@ -25,8 +25,8 @@ import { Rental } from './entity/rental';
       port: process.env.DATABASE_PORT
         ? parseInt(process.env.DATABASE_PORT, 10)
         : 3306,
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASS,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
